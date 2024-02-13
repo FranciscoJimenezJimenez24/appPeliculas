@@ -6,6 +6,8 @@ import { MoviePageComponent } from './pages/movie-page/movie-page.component';
 import { LayoutPageComponent } from './pages/layout-page/layout-page.component';
 import { ListPageComponent } from './pages/list-page/list-page.component';
 import { SearchPageComponent } from './pages/search-page/search-page.component';
+import { MaterialModule } from '../material/material.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -17,7 +19,10 @@ import { SearchPageComponent } from './pages/search-page/search-page.component';
   ],
   imports: [
     CommonModule,
-    MoviesRoutingModule
+    MoviesRoutingModule,
+    MaterialModule,
+    ReactiveFormsModule,
+
   ]
 })
 export class MoviesModule { }
