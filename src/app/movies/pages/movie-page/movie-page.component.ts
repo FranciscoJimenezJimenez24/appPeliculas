@@ -1,4 +1,8 @@
-import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MovieService } from '../../services/movie.service';
+import { Movie, Root } from './../../interfaces/movie.interface';
+import { Component, OnInit } from '@angular/core';
+import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-movie-page',
@@ -6,6 +10,28 @@ import { Component } from '@angular/core';
   styles: [
   ]
 })
-export class MoviePageComponent {
+export class MoviePageComponent implements OnInit{
+  public movie?:Movie;
 
+  constructor(
+    private movieService: MovieService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    ){
+  }
+
+  ngOnInit():void{
+    this.activatedRoute.params
+      .pipe(
+        switchMap(({id})=>this.movieService.getMovieById(id))
+      )
+      .subscribe(pelicula=>{
+        if (!pelicula) return this.router.navigate(['/movies/list']);
+        this.movie=pelicula;
+        return;
+      })
+        
+        
+      
+  }
 }

@@ -17,11 +17,11 @@ export class SearchPageComponent {
   constructor(private movieService:MovieService){}
 
   public searchMovie(){
-    console.log("value")
     const value:string=this.searchInput.value || ''
-
+    
     this.movieService.getMovieByTitle(value).subscribe(
       peliculas =>{
+        console.log(peliculas)
         if (peliculas==undefined) return;
         this.peliculas=(peliculas as Root).results;
       }

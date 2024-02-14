@@ -1,1 +1,11 @@
-<p>list-page works!</p>
+<h1>Listado de Peliculas</h1>
+<mat-divider></mat-divider>
+<div class="grid mb-8">
+
+  <div *ngFor="let movie of listaMovies"
+    class="col-12 sm:col-4 md:col-3 xl:col-2">
+    <!-- <heroes-hero-card [movie]="movie"></heroes-hero-card> -->
+    
+    <a [routerLink]="['/movies',movie.id]">{{movie.title}}</a>
+  </div>
+</div>

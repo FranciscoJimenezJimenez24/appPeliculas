@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Movie, Root } from '../../interfaces/movie.interface';
+import { MovieService } from '../../services/movie.service';
 
 @Component({
   selector: 'app-list-page',
@@ -6,6 +8,16 @@ import { Component } from '@angular/core';
   styles: [
   ]
 })
-export class ListPageComponent {
+export class ListPageComponent implements OnInit{
+  @Input()
+  public listaMovies:Movie[]=[];
+  constructor(private movieService:MovieService) {}
 
+  ngOnInit(): void {
+    this.movieService.getMovies().subscribe(
+      peliculas=>{
+        this.listaMovies=(peliculas as Root).results;
+      }
+    )
+  }
 }
