@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, catchError, of } from 'rxjs';
-import { Movie, Root } from '../interfaces/movie.interface';
+import { Movie, Root } from '../shared/interfaces/movie.interface';
 import { HttpClient } from '@angular/common/http';
 import { SharedService } from 'src/app/shared/services/shared.service';
 import { URL_API_FILM, environment } from 'src/environments/environments';

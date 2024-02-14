@@ -5,7 +5,8 @@
   <div *ngFor="let movie of listaMovies"
     class="col-12 sm:col-4 md:col-3 xl:col-2">
     <!-- <heroes-hero-card [movie]="movie"></heroes-hero-card> -->
-    
-    <a [routerLink]="['/movies',movie.id]">{{movie.title}}</a>
+    <movies-movie-card [routerLink]="['/movies',movie.id]" [movie]="movie">
+    </movies-movie-card>
+
   </div>
 </div>

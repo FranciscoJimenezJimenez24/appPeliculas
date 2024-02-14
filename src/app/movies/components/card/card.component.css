@@ -1,0 +1,8 @@
+.truncate {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Número máximo de líneas a mostrar */
+  -webkit-box-orient: vertical;
+  white-space: normal;
+  width: 1px;
+}

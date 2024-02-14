@@ -3,14 +3,17 @@
   <mat-form-field>
     <mat-label>Buscador de Películas</mat-label>
     <input
-      type="text"
+      type="search"
       matInput
       [formControl]="searchInput"
-      (input)="searchMovie()">
-
-        <mat-option *ngFor="let movie of peliculas" [value]="movie.id">
-          {{movie.title}}
-        </mat-option>
-
+      (keydown.enter)="searchMovie()">
 
   </mat-form-field>
+
+  <div *ngFor="let movie of peliculas"
+        class="col-12 sm:col-4 md:col-3 xl:col-2">
+        <movies-movie-card [routerLink]="['/movies',movie.id]" [movie]="movie">
+        </movies-movie-card>
+
+    </div>
+</div>

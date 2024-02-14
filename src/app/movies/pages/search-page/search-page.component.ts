@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { MovieService } from '../../services/movie.service';
+import { MovieService } from '../../../services/movie.service';
 import { FormControl } from '@angular/forms';
-import { Movie, Root } from '../../interfaces/movie.interface';
+import { Movie, Root } from '../../../shared/interfaces/movie.interface';
 
 @Component({
   selector: 'app-search-page',
@@ -18,15 +18,12 @@ export class SearchPageComponent {
 
   public searchMovie(){
     const value:string=this.searchInput.value || ''
-    
+
     this.movieService.getMovieByTitle(value).subscribe(
       peliculas =>{
-        console.log(peliculas)
         if (peliculas==undefined) return;
         this.peliculas=(peliculas as Root).results;
       }
     )
-
-
   }
 }

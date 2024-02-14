@@ -8,6 +8,8 @@ import { ListPageComponent } from './pages/list-page/list-page.component';
 import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { MaterialModule } from '../material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CardComponent } from './components/card/card.component';
+import { MovieImagePipe } from './pipe/movie-image.pipe';
 
 
 @NgModule({
@@ -16,6 +18,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     LayoutPageComponent,
     ListPageComponent,
     SearchPageComponent,
+    CardComponent,
+    MovieImagePipe
   ],
   imports: [
     CommonModule,

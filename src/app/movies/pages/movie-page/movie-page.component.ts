@@ -1,6 +1,6 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { MovieService } from '../../services/movie.service';
-import { Movie, Root } from './../../interfaces/movie.interface';
+import { MovieService } from '../../../services/movie.service';
+import { Movie } from '../../../shared/interfaces/movie.interface';
 import { Component, OnInit } from '@angular/core';
 import { switchMap } from 'rxjs';
 
@@ -30,8 +30,9 @@ export class MoviePageComponent implements OnInit{
         this.movie=pelicula;
         return;
       })
-        
-        
-      
+  }
+
+  goBack(){
+    this.router.navigate(['/movies/list'])
   }
 }
