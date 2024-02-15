@@ -40,17 +40,12 @@ export class LoginPageComponent {
   }
 
   async acceder() {
-
     if (this.loginForm.valid) {
-
       const data = this.loginForm.value;
       const RESPONSE = await this.authService.login(data).toPromise();
-        // console.log(response);
       if (RESPONSE !== undefined){
         if (RESPONSE.ok) {
           if (RESPONSE.data.token) {
-            // this.cookieService.set('token', RESPONSE.data.token);
-            // console.log('ya he puesto el token');
             localStorage.setItem('token', RESPONSE.data.token);
             localStorage.setItem('usuario', RESPONSE.data.usuario);
             localStorage.setItem('nombre_publico', RESPONSE.data.nombre_publico);
@@ -60,7 +55,7 @@ export class LoginPageComponent {
               'Content-Type': 'application/json',
               Authorization: `Bearer ${RESPONSE.data.token}`
             });
-            this.router.navigate([`/${RESPONSE.data.accion}`]);
+            this.router.navigate([`/movies/list`]);
 
           } else if (RESPONSE.data.valido === 0) {
             this.snackBar.open('Usuario inhabilitado', 'Cerrar', {duration: 5000});

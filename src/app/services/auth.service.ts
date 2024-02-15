@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environments.prod';
 import { User } from '../shared/interfaces/user.interface';
 import { HttpClient } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { Observable, catchError, map, of, tap } from 'rxjs';
 import { URL_API } from 'src/environments/environments';
 import { ApiResponse } from '../shared/interfaces/api-response';
 
@@ -11,7 +11,6 @@ import { ApiResponse } from '../shared/interfaces/api-response';
 })
 export class AuthService {
 
-  private baseUrl= environment.baseUrl;
   private user?:User;
 
   constructor(private http: HttpClient) { }
@@ -32,4 +31,20 @@ export class AuthService {
     this.user=undefined;
     localStorage.clear();
   }
+
+  checkAuthentication():Observable<boolean> {
+    if (!localStorage.getItem('token')) return of(false); //no necesitamos operacion asincrona
+
+    const token = localStorage.getItem('token');
+
+    return this.http.get<User>(`${URL_API}/usuario.php`)
+      .pipe(
+        tap(user=>this.user=user),//tap: efecto secundario para almacenar el usuario
+        map(user=>!!user),//map: transformamos la salida, hacemos doble negación, negamos y negamos
+                          //Basicamente devolvemos true si hay un usuario
+                          //Es lo mismo que poner map ( user => user? true : false)
+        catchError(err=>of(false))//y si el backend devuelve error, es false
+      )
+  }
+
 }
