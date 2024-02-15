@@ -13,7 +13,7 @@ const routes: Routes = [
       { path:'list',component:  ListPageComponent},
       { path:'search', component: SearchPageComponent},
       { path:':id',component: MoviePageComponent},
-      //{ path:'**', redirectTo: 'list'}
+      { path:'**', redirectTo: 'list'}
     ]
 }
 ];

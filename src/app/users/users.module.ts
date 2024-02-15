@@ -6,7 +6,6 @@ import { EditUserComponent } from './edit-user/edit-user.component';
 import { DeleteUserComponent } from './delete-user/delete-user.component';
 import { MaterialModule } from '../material/material.module';
 import { UsersRoutingModule } from './users-routing.module';
-import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -15,7 +14,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     UsersComponent,
     AddUserComponent,
     EditUserComponent,
-    DeleteUserComponent
+    DeleteUserComponent,
   ],
   imports: [
     CommonModule,

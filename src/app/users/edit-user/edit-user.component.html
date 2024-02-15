@@ -1,6 +1,6 @@
 <div class="container">
     <h3 mat-dialog-title>Agregar nuevo Usuario</h3>
-  
+
     <form class="mat-dialog-content" [formGroup]="usuarioForm">
       <div class="form">
         <mat-form-field class="custom-mat-form-field" color="accent">
@@ -8,7 +8,7 @@
           <mat-error *ngIf="usuarioForm.get('usuario')?.hasError('required')">El campo Usuario es obligatorio</mat-error>
         </mat-form-field>
       </div>
-  
+
       <div class="form">
         <mat-form-field class="custom-mat-form-field" color="accent">
           <input matInput placeholder="Correo electrónico" formControlName="email" maxlength="255" required>
@@ -16,21 +16,21 @@
           <mat-error *ngIf="usuarioForm.get('email')?.hasError('email')">Ingrese un correo electrónico válido</mat-error>
         </mat-form-field>
       </div>
-  
+
       <div class="form">
         <mat-form-field class="custom-mat-form-field" color="accent">
           <input matInput placeholder="Nombre público" formControlName="nombre_publico" maxlength="255" required>
           <mat-error *ngIf="usuarioForm.get('nombre_publico')?.hasError('required')">El campo Nombre público es obligatorio</mat-error>
         </mat-form-field>
       </div>
-  
+
       <div class="form">
         <mat-form-field class="custom-mat-form-field" color="accent">
           <input matInput placeholder="Contraseña" formControlName="password" type="password" maxlength="100" required>
           <mat-error *ngIf="usuarioForm.get('pass_user')?.hasError('required')">El campo Contraseña es obligatorio</mat-error>
         </mat-form-field>
       </div>
-  
+
       <div class="form">
         <mat-form-field class="custom-mat-form-field" color="accent">
           <mat-label>Rol</mat-label>
@@ -41,7 +41,7 @@
           <mat-error *ngIf="usuarioForm.get('id_rol')?.hasError('required')">Seleccione un Rol</mat-error>
         </mat-form-field>
       </div>
-  
+
       <div mat-dialog-actions class="buttons">
         <button mat-raised-button color="primary" id="onSubmit" type="submit" [disabled]="!usuarioForm.valid" (click)="confirmEdit()">Guardar</button>
         <button mat-flat-button color="primary" id="onNoClick" (click)="onNoClick()" tabindex="-1">Cancelar</button>

@@ -7,7 +7,6 @@ import { LayoutPageComponent } from '../layout-page/layout-page.component';
 import { ListPageComponent } from './pages/list-page/list-page.component';
 import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { MaterialModule } from '../material/material.module';
-import { ReactiveFormsModule } from '@angular/forms';
 import { CardComponent } from './components/card/card.component';
 import { MovieImagePipe } from './pipe/movie-image.pipe';
 
@@ -24,8 +23,7 @@ import { MovieImagePipe } from './pipe/movie-image.pipe';
   imports: [
     CommonModule,
     MoviesRoutingModule,
-    MaterialModule,
-    ReactiveFormsModule,
+    MaterialModule
 
   ]
 })

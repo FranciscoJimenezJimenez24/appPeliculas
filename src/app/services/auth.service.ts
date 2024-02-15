@@ -3,6 +3,8 @@ import { environment } from 'src/environments/environments.prod';
 import { User } from '../shared/interfaces/user.interface';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
+import { URL_API } from 'src/environments/environments';
+import { ApiResponse } from '../shared/interfaces/api-response';
 
 @Injectable({
   providedIn: 'root'
@@ -21,12 +23,9 @@ export class AuthService {
     return structuredClone(this.user)
   }
 
-  login(email:string,password:string):Observable<User | undefined>{
-    return this.http.get<User>(`${this.baseUrl}/users/1`)
-      .pipe(
-        tap((user: User | undefined) => this.user = user),
-        tap((user: User | undefined) => localStorage.setItem('token',"sdfgkpasedjrgGDFsdfgdsfg.sfgqeawrgtQAFdfgh"))
-      )
+  login(data: any){
+    const body = JSON.stringify(data);
+    return this.http.post<ApiResponse>(`${URL_API}/login.php`, body);
   }
 
   logout(){
