@@ -4,4 +4,5 @@ export interface User{
   id_rol: string;
   contrasena:string;
   nombre_publico:string;
+  email: string;
 }

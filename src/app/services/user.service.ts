@@ -5,7 +5,7 @@ import { CommonService } from '../shared/common.service';
 import { URL_API } from 'src/environments/environments';
 import { ApiResponse } from '../shared/interfaces/api-response';
 
-const ENDPOINT = 'user';
+const ENDPOINT = 'usuario';
 
 @Injectable({
   providedIn: 'root'

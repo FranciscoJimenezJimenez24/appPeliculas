@@ -12,6 +12,10 @@ const routes: Routes = [
     loadChildren:()=>import('./movies/movies.module').then(m => m.MoviesModule)
   },
   {
+    path:'users',
+    loadChildren:()=>import('./users/users.module').then(m  => m.UsersModule)
+  },
+  {
     path:'404',
     component:Error404PageComponent
   },

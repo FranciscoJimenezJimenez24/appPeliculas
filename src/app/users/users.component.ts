@@ -49,10 +49,10 @@ export class UsersComponent {
   async getUsuarios() {
     const RESPONSE = await this.servicioUsuarios.getAllUsuarios().toPromise();
     if (RESPONSE !== undefined) {
-      if (RESPONSE.permises !== undefined) {
+      if (RESPONSE.permises !== undefined && RESPONSE.permises !== null) {
         this.permises = RESPONSE.permises;
         if (RESPONSE.ok) {
-          this.displayedColumns = ['id_usuario', 'usuario', 'nombre_publico', 'rol', 'habilitado', 'actions'];
+          this.displayedColumns = ['id_usuario', 'usuario', 'nombre_publico', 'id_rol', 'actions'];
           this.servicioUsuarios.users = RESPONSE.data as User[];
           this.dataSource.data = this.servicioUsuarios.users;
           this.dataSource.sort = this.sort;
@@ -62,8 +62,6 @@ export class UsersComponent {
         }
       }
     }
-
-
   }
 
   async addUsuario() {
