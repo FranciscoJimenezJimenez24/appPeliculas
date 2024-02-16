@@ -9,13 +9,15 @@
         </button>
       </mat-toolbar>
 
-      <mat-nav-list >
-
-        <mat-list-item  *ngFor="let item of sidebarItems " (click)="sidenav.toggle()"
-          [routerLink]=item.url>
-          <mat-icon matListItemIcon >{{item.icon}}</mat-icon>
-          {{item.label}}
-        </mat-list-item>
+      <mat-nav-list>
+        <ng-container *ngFor="let item of sidebarItems">
+          <ng-container *ngIf="esSuperadmin || item.label !== 'usuarios'">
+            <mat-list-item (click)="sidenav.toggle()" [routerLink]="item.url">
+              <mat-icon matListItemIcon>{{item.icon}}</mat-icon>
+              {{item.label}}
+            </mat-list-item>
+          </ng-container>
+        </ng-container>
       </mat-nav-list>
 
     </mat-sidenav>
@@ -25,7 +27,7 @@
         <mat-icon>menu</mat-icon>
       </button>
       <span class="spacer"></span>
-      <span>{{user?.usuario}}</span>
+      <span>{{nombre_publico}}</span>
       <button mat-button (click)="onLogout()">
         Logout
       </button>

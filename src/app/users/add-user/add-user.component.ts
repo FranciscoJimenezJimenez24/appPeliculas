@@ -20,9 +20,11 @@ export class AddUserComponent {
 
   ngOnInit() {
     this.usuarioForm = new FormGroup({
+      id_usuario: new FormControl(0),
       usuario: new FormControl(null, [Validators.required, Validators.email]),
       password: new FormControl(null, [Validators.required]),
       id_rol: new FormControl(null, [Validators.required]),
+      email: new FormControl(null, [Validators.required]),
       nombre_publico: new FormControl(null),
     });
 

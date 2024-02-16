@@ -42,5 +42,9 @@ export class UserService {
     return this.http.delete<ApiResponse>(`${URL_API}/${ENDPOINT}.php?id=${usuario.id_usuario}`, { headers: this.commonService.headers });
   }
 
+  getUsuarioById(id_usuario: number) {
+    return this.http.get<ApiResponse>(`${URL_API}/${ENDPOINT}.php?id_usuario=${id_usuario}`, { headers: this.commonService.headers });
+  }
+
 
 }

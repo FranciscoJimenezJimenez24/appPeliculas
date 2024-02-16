@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute } from '@angular/router';
+import { switchMap } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/shared/interfaces/user.interface';
 
@@ -15,7 +17,8 @@ export class EditUserComponent {
 
   constructor(public dialogRef: MatDialogRef<EditUserComponent>,
               private servicioUsuario: UserService,
-              public snackBar: MatSnackBar
+              public snackBar: MatSnackBar,
+              private activatedRoute: ActivatedRoute,
   ) { }
 
   ngOnInit() {
@@ -23,8 +26,20 @@ export class EditUserComponent {
       usuario: new FormControl(null, [Validators.required, Validators.email]),
       password: new FormControl(null, [Validators.required]),
       id_rol: new FormControl(null, [Validators.required]),
+      email: new FormControl(null, [Validators.required]),
       nombre_publico: new FormControl(null),
     });
+
+    this.activatedRoute.params
+      .pipe(
+        // Desectructuramos params y obtengo el id, para poder pasarlo al servicio
+        switchMap(({id_usuario})=>this.servicioUsuario.getUsuarioById(id_usuario))
+      ).subscribe(user => {
+        if (!user) return undefined;
+        this.usuarioForm.reset(user)
+        return;
+
+    })
 
   }
 

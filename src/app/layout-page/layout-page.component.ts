@@ -10,6 +10,11 @@ import { User } from '../shared/interfaces/user.interface';
   ]
 })
 export class LayoutPageComponent {
+
+  nombre_publico: string | null= localStorage.getItem('nombre_publico');
+  rol: string | null= "";
+  esSuperadmin: boolean = false;
+
   public sidebarItems = [
     { label: 'Listado',icon: 'label',url: './list' },
     { label: 'Buscar',icon: 'search',url: './search' },
@@ -17,10 +22,15 @@ export class LayoutPageComponent {
     { label: 'Favoritos', icon:'heart',url:'**'}
   ]
 
+
   constructor(
     private authService:AuthService,
     private router:Router
-    ){}
+    ){
+      this.rol = localStorage.getItem('rol');
+      this.esSuperadmin = this.rol === 'Superadmin';
+      console.log("Superadmin: ",this.esSuperadmin)
+    }
 
   onLogout() {
     this.authService.logout();
@@ -30,4 +40,6 @@ export class LayoutPageComponent {
   get user(): User | undefined{
     return this.authService.currentUser;
   }
+
+  
 }

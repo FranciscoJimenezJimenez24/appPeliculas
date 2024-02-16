@@ -17,7 +17,7 @@ export class AuthService {
 
   get currentUser(): User | undefined{
     if (!this.user) return undefined;
-
+    
     //devuelve una copia
     return structuredClone(this.user)
   }
