@@ -6,6 +6,7 @@ import { EditUserComponent } from './edit-user/edit-user.component';
 import { DeleteUserComponent } from './delete-user/delete-user.component';
 import { MaterialModule } from '../material/material.module';
 import { UsersRoutingModule } from './users-routing.module';
+import { PeliculasFavoritasComponent } from './peliculas-favoritas/peliculas-favoritas.component';
 
 
 
@@ -15,6 +16,7 @@ import { UsersRoutingModule } from './users-routing.module';
     AddUserComponent,
     EditUserComponent,
     DeleteUserComponent,
+    PeliculasFavoritasComponent,
   ],
   imports: [
     CommonModule,

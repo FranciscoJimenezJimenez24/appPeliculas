@@ -3,7 +3,7 @@ import { User } from '../shared/interfaces/user.interface';
 import { HttpClient } from '@angular/common/http';
 import { CommonService } from '../shared/common.service';
 import { URL_API } from 'src/environments/environments';
-import { ApiResponse } from '../shared/interfaces/api-response';
+import { ApiResponse } from '../shared/interfaces/api-response.interface';
 
 const ENDPOINT = 'usuario';
 

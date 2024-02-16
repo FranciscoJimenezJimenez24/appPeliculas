@@ -7,10 +7,11 @@ import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { UserService } from '../services/user.service';
 import { Overlay } from '@angular/cdk/overlay';
-import { Permises } from '../shared/interfaces/api-response';
+import { Permises } from '../shared/interfaces/api-response.interface';
 import { DeleteUserComponent } from './delete-user/delete-user.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { AddUserComponent } from './add-user/add-user.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-users',
@@ -39,7 +40,8 @@ export class UsersComponent {
   constructor(
               public dialog: MatDialog,
               private servicioUsuarios: UserService,
-              private overlay: Overlay
+              private overlay: Overlay,
+              private router: Router
               ) { }
 
   ngOnInit() {
@@ -140,5 +142,9 @@ export class UsersComponent {
           this.dataSource.filter = JSON.stringify(this.filterValues);
       });
 
-    }
+  }
+
+  goBack(){
+    this.router.navigate(['/movies/list'])
+  }
 }

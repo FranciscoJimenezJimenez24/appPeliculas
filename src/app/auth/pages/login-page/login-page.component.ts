@@ -51,6 +51,8 @@ export class LoginPageComponent {
             localStorage.setItem('nombre_publico', RESPONSE.data.nombre_publico);
             localStorage.setItem('ultimaOpcion', RESPONSE.data.opcion);
             localStorage.setItem('ultimoGrupo', RESPONSE.data.grupo);
+            localStorage.setItem('id_rol', RESPONSE.data.id_rol);
+
             this.commonService.headers = new HttpHeaders({
               'Content-Type': 'application/json',
               Authorization: `Bearer ${RESPONSE.data.token}`

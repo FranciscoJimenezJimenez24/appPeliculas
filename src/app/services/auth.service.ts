@@ -4,7 +4,7 @@ import { User } from '../shared/interfaces/user.interface';
 import { HttpClient } from '@angular/common/http';
 import { Observable, catchError, map, of, tap } from 'rxjs';
 import { URL_API } from 'src/environments/environments';
-import { ApiResponse } from '../shared/interfaces/api-response';
+import { ApiResponse } from '../shared/interfaces/api-response.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,7 @@ export class AuthService {
 
   get currentUser(): User | undefined{
     if (!this.user) return undefined;
-    
+
     //devuelve una copia
     return structuredClone(this.user)
   }

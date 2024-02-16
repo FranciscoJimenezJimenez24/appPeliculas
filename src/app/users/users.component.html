@@ -60,6 +60,8 @@
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
   </div>
-  <!-- <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25]"></mat-paginator> -->
+
+  <button (click)="goBack()">Volver a la pagina principal</button>
+  <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
 
 </div>

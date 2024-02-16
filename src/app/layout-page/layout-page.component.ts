@@ -12,10 +12,16 @@ import { User } from '../shared/interfaces/user.interface';
 export class LayoutPageComponent {
 
   nombre_publico: string | null= localStorage.getItem('nombre_publico');
-  rol: string | null= "";
+  id_rol: string | null= localStorage.getItem('id_rol');
   esSuperadmin: boolean = false;
 
   public sidebarItems = [
+    { label: 'Listado',icon: 'label',url: './list' },
+    { label: 'Buscar',icon: 'search',url: './search' },
+    { label: 'Favoritos', icon:'heart',url:'**'}
+  ]
+
+  public sidebarItemsSuperAdmin = [
     { label: 'Listado',icon: 'label',url: './list' },
     { label: 'Buscar',icon: 'search',url: './search' },
     { label: 'Usuarios', icon: 'supervisor_account', url: '/users' },
@@ -26,11 +32,7 @@ export class LayoutPageComponent {
   constructor(
     private authService:AuthService,
     private router:Router
-    ){
-      this.rol = localStorage.getItem('rol');
-      this.esSuperadmin = this.rol === 'Superadmin';
-      console.log("Superadmin: ",this.esSuperadmin)
-    }
+    ){}
 
   onLogout() {
     this.authService.logout();
@@ -41,5 +43,5 @@ export class LayoutPageComponent {
     return this.authService.currentUser;
   }
 
-  
+
 }
