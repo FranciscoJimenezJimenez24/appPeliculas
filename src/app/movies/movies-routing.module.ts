@@ -4,6 +4,7 @@ import { LayoutPageComponent } from '../layout-page/layout-page.component';
 import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { MoviePageComponent } from './pages/movie-page/movie-page.component';
 import { ListPageComponent } from './pages/list-page/list-page.component';
+import { PeliculasFavoritasComponent } from './pages/peliculas-favoritas/peliculas-favoritas.component';
 
 const routes: Routes = [
   {
@@ -11,9 +12,10 @@ const routes: Routes = [
     component: LayoutPageComponent,
     children:[
       { path:'list',component:  ListPageComponent},
-      { path:'search', component: SearchPageComponent},
+      { path:'search', component: PeliculasFavoritasComponent},
       { path:':id',component: MoviePageComponent},
-      { path:'**', redirectTo: 'list'}
+      { path:'fav',component:PeliculasFavoritasComponent},
+      { path:'**', redirectTo: 'list',pathMatch:"full"}
     ]
 }
 ];

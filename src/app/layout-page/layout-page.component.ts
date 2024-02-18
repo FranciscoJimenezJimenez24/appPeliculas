@@ -13,19 +13,18 @@ export class LayoutPageComponent {
 
   nombre_publico: string | null= localStorage.getItem('nombre_publico');
   id_rol: string | null= localStorage.getItem('id_rol');
-  esSuperadmin: boolean = false;
 
   public sidebarItems = [
     { label: 'Listado',icon: 'label',url: './list' },
     { label: 'Buscar',icon: 'search',url: './search' },
-    { label: 'Favoritos', icon:'heart',url:'**'}
+    { label: 'Favoritos', icon:'fav',url:'./fav'}
   ]
 
   public sidebarItemsSuperAdmin = [
     { label: 'Listado',icon: 'label',url: './list' },
     { label: 'Buscar',icon: 'search',url: './search' },
     { label: 'Usuarios', icon: 'supervisor_account', url: '/users' },
-    { label: 'Favoritos', icon:'heart',url:'**'}
+    { label: 'Favoritos', icon:'fav',url:'./fav'}
   ]
 
 

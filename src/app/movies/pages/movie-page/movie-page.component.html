@@ -38,6 +38,13 @@
         <mat-list-item>{{movie?.video}}</mat-list-item> -->
       </mat-list>
 
+      <mat-card-content>
+        <button (click)="addFavourite()" color="primary" mat-raised-button>
+          <mat-icon>favorite</mat-icon>
+          
+        </button>
+      </mat-card-content>
+
 
       <mat-card-content>
         <button (click)="goBack()" color="primary" mat-raised-button>

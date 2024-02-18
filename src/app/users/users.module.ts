@@ -6,7 +6,8 @@ import { EditUserComponent } from './edit-user/edit-user.component';
 import { DeleteUserComponent } from './delete-user/delete-user.component';
 import { MaterialModule } from '../material/material.module';
 import { UsersRoutingModule } from './users-routing.module';
-import { PeliculasFavoritasComponent } from './peliculas-favoritas/peliculas-favoritas.component';
+import { PeliculasFavoritasComponent } from '../movies/pages/peliculas-favoritas/peliculas-favoritas.component';
+import { MovieImagePipe } from '../movies/pipe/movie-image.pipe';
 
 
 
