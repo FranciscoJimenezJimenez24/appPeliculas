@@ -7,6 +7,8 @@ import { AuthService } from '../../../services/auth.service';
 import { FavService } from 'src/app/services/fav.service';
 import { User } from 'src/app/shared/interfaces/user.interface';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { UserService } from '../../../services/user.service';
+import { Permises } from 'src/app/shared/interfaces/api-response.interface';
 
 @Component({
   selector: 'app-movie-page',
@@ -14,8 +16,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styles: [
   ]
 })
-export class MoviePageComponent implements OnInit{
+export class MoviePageComponent implements OnInit {
   public movie?:Movie;
+  token:string | null=localStorage.getItem('token');
+  permises!:Permises
+  user!:User
 
   constructor(
     private movieService: MovieService,
@@ -23,11 +28,13 @@ export class MoviePageComponent implements OnInit{
     private router: Router,
     private authService: AuthService,
     private favService: FavService,
+    private userService: UserService,
     private snackBar: MatSnackBar,
     ){
   }
 
   ngOnInit():void{
+    
     this.activatedRoute.params
       .pipe(
         switchMap(({id})=>this.movieService.getMovieById(id))
@@ -37,16 +44,13 @@ export class MoviePageComponent implements OnInit{
         this.movie=pelicula;
         return;
       })
+      this.getUserPorToken();
   }
-
-  goBack(){
-    this.router.navigate(['/movies/list'])
-  }
-
   async addFavourite(){
-    const user=this.authService.currentUser;
-    if (user){
-      const RESPONSE = await this.favService.addFavorito(user.id_usuario, this.movie!.id).toPromise();
+    
+    if (this.user!=undefined){
+      const RESPONSE = await this.favService.addFavorito(this.user.id_usuario, this.movie!.id).toPromise();
+      console.log(RESPONSE);
       if (RESPONSE && RESPONSE.ok && RESPONSE?.message) {
         this.snackBar.open("Agregada a favoritas", 'Cerrar', { duration: 5000 });
       } else {
@@ -54,4 +58,28 @@ export class MoviePageComponent implements OnInit{
       }
     }
   }
+
+  async getUserPorToken() {
+    if (this.token) {
+      const RESPONSE = await this.userService.getUsuarioByToken(this.token).toPromise();
+      
+      if (RESPONSE !== undefined) {
+        if (RESPONSE.permises !== undefined && RESPONSE.permises !== null) {
+          this.permises = RESPONSE.permises;
+    
+          if (RESPONSE.ok) {
+            // Se almacena en la propiedad 'userActual' la respuesta de la solicitud
+            this.user = RESPONSE.data[0] as User;
+            // Se asigna a la propiedad 'currentUser' del servicio los valores del usuario
+            // obtenidos a partir del token
+            this.userService.user = this.user
+          }
+        }
+      }
+    }
+  }
+  goBack(){
+    this.router.navigate(["/movies/list"]);
+  }
 }
+
