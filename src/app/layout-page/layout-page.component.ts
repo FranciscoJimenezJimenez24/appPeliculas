@@ -17,14 +17,14 @@ export class LayoutPageComponent {
   public sidebarItems = [
     { label: 'Listado',icon: 'label',url: './list' },
     { label: 'Buscar',icon: 'search',url: './search' },
-    { label: 'Favoritos', icon:'fav',url:'./fav'}
+    { label: 'Favoritos', icon:'favorite',url:'./fav'}
   ]
 
   public sidebarItemsSuperAdmin = [
     { label: 'Listado',icon: 'label',url: './list' },
     { label: 'Buscar',icon: 'search',url: './search' },
     { label: 'Usuarios', icon: 'supervisor_account', url: '/users' },
-    { label: 'Favoritos', icon:'fav',url:'./fav'}
+    { label: 'Favoritos', icon:'favorite',url:'./fav'}
   ]
 
 

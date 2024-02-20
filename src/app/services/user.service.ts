@@ -18,6 +18,8 @@ export class UserService {
   constructor(private http: HttpClient, private commonService: CommonService) {
   }
 
+
+
   getAllUsuarios() {
     return this.http.get<ApiResponse>(`${URL_API}/${ENDPOINT}.php`, { headers: this.commonService.headers });
   }
@@ -43,23 +45,23 @@ export class UserService {
     return this.http.delete<ApiResponse>(`${URL_API}/${ENDPOINT}.php?id=${usuario.id_usuario}`, { headers: this.commonService.headers });
   }
 
-  getUsuarioById(id_usuario: number) {
+  getUsuarioById(id_usuario: string | number | null) {
     return this.http.get<ApiResponse>(`${URL_API}/${ENDPOINT}.php?id_usuario=${id_usuario}`, { headers: this.commonService.headers });
   }
 
-  // getUsuarioByToken(token:string){
-  //   return this.http.get<ApiResponse>(`${URL_API}/${ENDPOINT}.php?token_sesion=${token}`, { headers: this.commonService.headers });
+  getUsuarioByToken(token:string){
+    return this.http.get<ApiResponse>(`${URL_API}/${ENDPOINT}.php?token_sesion=${token}`, { headers: this.commonService.headers });
+  }
+
+  // getUsuarioByToken(token_sesion: string | null) {
+  //   const body = JSON.stringify({ token_sesion: token_sesion });
+  //   let encodedToken = ""; // Inicializar la variable
+  //   if (token_sesion !== null) {
+  //     encodedToken = encodeURIComponent(token_sesion); // Codificar el token solo si no es nulo
+  //   }
+  //   console.log(token_sesion);
+  //   console.log(body);
+  //   return this.http.post<ApiResponse>(`${URL_API}/${ENDPOINT}.php?token_sesion=${encodedToken}`, body, { headers: this.commonService.headers });
   // }
 
-  getUsuarioByToken(token_sesion: string | null) {
-    const body = JSON.stringify({ token_sesion: token_sesion });
-    let encodedToken = ""; // Inicializar la variable
-    if (token_sesion !== null) {
-      encodedToken = encodeURIComponent(token_sesion); // Codificar el token solo si no es nulo
-    }
-    // console.log(token_sesion);
-    // console.log(body);
-    return this.http.post<ApiResponse>(`${URL_API}/${ENDPOINT}.php?token_sesion=${encodedToken}`, body, { headers: this.commonService.headers });
-  }
-  
 }

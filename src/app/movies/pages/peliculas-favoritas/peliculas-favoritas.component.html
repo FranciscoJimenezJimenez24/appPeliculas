@@ -4,9 +4,9 @@
         <mat-spinner></mat-spinner>
       </mat-grid-tile>
     </mat-grid-list>
-  
+
   </ng-template>
-  
+
   <div class="fondo" *ngFor="let movie of peliculas_favoritas" class="grid p-2">
     <mat-card class="col-12 sm:col-6">
       <mat-card-header>
@@ -15,13 +15,13 @@
       </mat-card-header>
       <!-- <img [src]="movie.poster_path" alt="movie.title" mat-card-image> -->
     </mat-card>
-  
+
     <mat-card class="col-12 sm:col-6">
       <!-- <mat-card-header>
         <mat-card-title>Información</mat-card-title>
         <mat-card-subtitle>{{movie.superhero}}</mat-card-subtitle>
       </mat-card-header> -->
-  
+
       <mat-card-content>
         <mat-list>
           <!-- <mat-list-item>{{movie?.adult}}</mat-list-item>
@@ -37,17 +37,16 @@
           <mat-list-item>{{movie?.title}}</mat-list-item>
           <mat-list-item>{{movie?.video}}</mat-list-item> -->
         </mat-list>
-  
-  
-        
-  
-  
+
+
+
+
+        <button mat-raised-button color="primary" (click)="borrarFavorito()" ><mat-icon>delete</mat-icon></button>
       </mat-card-content>
     </mat-card>
-  
-  
-  
-  
+
+
+
+
   </div>
-  
-  
+

@@ -9,6 +9,7 @@ import { User } from 'src/app/shared/interfaces/user.interface';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from '../../../services/user.service';
 import { Permises } from 'src/app/shared/interfaces/api-response.interface';
+import { FavoriteMovie } from 'src/app/shared/interfaces/fav.interface';
 
 @Component({
   selector: 'app-movie-page',
@@ -19,8 +20,10 @@ import { Permises } from 'src/app/shared/interfaces/api-response.interface';
 export class MoviePageComponent implements OnInit {
   public movie?:Movie;
   token:string | null=localStorage.getItem('token');
+  id_usuario:number | string | null=localStorage.getItem('id_usuario')
   permises!:Permises
   user!:User
+  lista_fav:FavoriteMovie[]=[]
 
   constructor(
     private movieService: MovieService,
@@ -34,7 +37,7 @@ export class MoviePageComponent implements OnInit {
   }
 
   ngOnInit():void{
-    
+
     this.activatedRoute.params
       .pipe(
         switchMap(({id})=>this.movieService.getMovieById(id))
@@ -44,11 +47,31 @@ export class MoviePageComponent implements OnInit {
         this.movie=pelicula;
         return;
       })
-      this.getUserPorToken();
+      this.getUser();
   }
-  async addFavourite(){
-    
-    if (this.user!=undefined){
+
+  async favorito(){
+    let borrar=0;
+    if (this.user != undefined) {
+      const RESPONSE= await this.favService.getAllFavoritos(this.user.id_usuario).toPromise();
+      if (RESPONSE && RESPONSE.ok) {
+        this.lista_fav=RESPONSE.data;
+        for (const fav of this.lista_fav) {
+          if (fav.id_pelicula == this.movie!.id && fav.id_usuario == this.user.id_usuario) {
+            const RESPONSE2 = await this.favService.deleteFavorito(fav.id_pelicula_favorita).toPromise();
+            if (RESPONSE2 && RESPONSE2.ok && RESPONSE2?.message) {
+              borrar = 1;
+              this.snackBar.open("Borrada de favoritas", 'Cerrar', { duration: 5000 });
+              break; // Salir del bucle una vez que se haya borrado de favoritas
+            } else {
+              this.snackBar.open('Error al borrar de favoritas', 'Cerrar', { duration: 5000 });
+            }
+          }
+        }
+        console.log(borrar)
+      }
+    }
+    if (borrar==0){
       const RESPONSE = await this.favService.addFavorito(this.user.id_usuario, this.movie!.id).toPromise();
       console.log(RESPONSE);
       if (RESPONSE && RESPONSE.ok && RESPONSE?.message) {
@@ -57,25 +80,19 @@ export class MoviePageComponent implements OnInit {
         this.snackBar.open('Error al agregar a favoritas', 'Cerrar', { duration: 5000 });
       }
     }
+
   }
 
-  async getUserPorToken() {
-    if (this.token) {
-      const RESPONSE = await this.userService.getUsuarioByToken(this.token).toPromise();
-      
-      if (RESPONSE !== undefined) {
-        if (RESPONSE.permises !== undefined && RESPONSE.permises !== null) {
-          this.permises = RESPONSE.permises;
-    
-          if (RESPONSE.ok) {
-            // Se almacena en la propiedad 'userActual' la respuesta de la solicitud
-            this.user = RESPONSE.data[0] as User;
-            // Se asigna a la propiedad 'currentUser' del servicio los valores del usuario
-            // obtenidos a partir del token
-            this.userService.user = this.user
-          }
+  async getUser(){
+    const RESPONSE= await this.userService.getUsuarioById(this.id_usuario).toPromise();
+    if (RESPONSE){
+      const users:User[]=RESPONSE.data;
+      users.forEach(user=>{
+        if (user.id_usuario==this.id_usuario){
+          this.user=user;
         }
-      }
+      });
+      console.log(this.user);
     }
   }
   goBack(){

@@ -18,7 +18,7 @@ export class FavService {
 
   constructor(private http:HttpClient, private commonService: CommonService) { }
 
-  getAllFavoritos(id_usuario: number) {
+  getAllFavoritos(id_usuario: number | null) {
     return this.http.get<ApiResponse>(`${URL_API}/${ENDPOINT}.php?id_usuario=${id_usuario}`, { headers: this.commonService.headers });
   }
 
