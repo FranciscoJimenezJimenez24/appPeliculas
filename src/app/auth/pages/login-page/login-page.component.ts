@@ -1,5 +1,5 @@
 import { HttpHeaders } from '@angular/common/http';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -14,6 +14,7 @@ import { CommonService } from 'src/app/shared/common.service';
 })
 export class LoginPageComponent {
   @Output() valueChange = new EventEmitter();
+  @ViewChild('passwordInput') passwordInput!: ElementRef;
 
   loginForm!: FormGroup;
   titulo = 'LOGEAO';
@@ -72,5 +73,11 @@ export class LoginPageComponent {
 
   forgotPassword() {
       this.valueChange.emit(true);
+  }
+
+  focusPasswordAfterDelay() {
+    setTimeout(() => {
+      this.passwordInput.nativeElement.focus();
+    }, 3000); // 3000 milliseconds (3 seconds) delay, adjust as needed
   }
 }
