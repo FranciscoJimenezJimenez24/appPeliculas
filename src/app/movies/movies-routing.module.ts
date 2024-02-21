@@ -12,12 +12,13 @@ const routes: Routes = [
     component: LayoutPageComponent,
     children:[
       { path:'list',component:  ListPageComponent},
-      { path:'search', component: SearchPageComponent}, //aqui iria searchcomponent
+      { path:'search', component: SearchPageComponent}, 
       { path:':id',component: MoviePageComponent},
-      { path:'fav',component:PeliculasFavoritasComponent},
+      { path:'fav', component:PeliculasFavoritasComponent},
+
       { path:'**', redirectTo: 'list',pathMatch:"full"}
     ]
-}
+  }
 ];
 
 @NgModule({

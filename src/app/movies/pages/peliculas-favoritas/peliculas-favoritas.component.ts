@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FavService } from '../../../services/fav.service';
 import { User } from 'src/app/shared/interfaces/user.interface';
 import { Permises } from 'src/app/shared/interfaces/api-response.interface';
@@ -14,7 +14,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styles: [
   ]
 })
-export class PeliculasFavoritasComponent {
+export class PeliculasFavoritasComponent implements OnInit{
 
   constructor(private favService:FavService, private userService: UserService, private movieService: MovieService, private snackBar: MatSnackBar,) {}
 
