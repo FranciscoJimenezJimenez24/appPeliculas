@@ -1,4 +1,4 @@
-<div class="flex flex-column p-2">
+<div class="flex flex-wrap p-2">
   <h3>Buscador</h3>
   <mat-form-field>
     <mat-label>Buscador de Películas</mat-label>
@@ -6,14 +6,12 @@
       type="search"
       matInput
       [formControl]="searchInput"
-      (keydown.enter)="searchMovie()">
-
+      (keydown.enter)="searchMovie()"
+    >
   </mat-form-field>
 
-  <div *ngFor="let movie of peliculas"
-        class="col-12 sm:col-4 md:col-3 xl:col-2">
-        <movies-movie-card [routerLink]="['/movies',movie.id]" [movie]="movie">
-        </movies-movie-card>
-
-    </div>
+  <div class="movie-card-container" *ngFor="let movie of peliculas">
+    <movies-movie-card [routerLink]="['/movies', movie.id]" [movie]="movie">
+    </movies-movie-card>
+  </div>
 </div>

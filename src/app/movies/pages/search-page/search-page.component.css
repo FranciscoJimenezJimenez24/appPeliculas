@@ -1,0 +1,16 @@
+.flex {
+  display: flex;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.movie-card-container {
+  flex: 0 0 auto;
+  width: 20%; /* Ajusta el ancho según tus necesidades */
+  padding: 10px; /* Ajusta el espaciado entre las tarjetas según tus necesidades */
+  box-sizing: border-box; /* Incluye el padding en el ancho total del contenedor */
+  margin-top: 10px; /* Ajusta el margen superior según sea necesario */
+
+}

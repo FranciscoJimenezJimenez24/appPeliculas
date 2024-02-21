@@ -22,6 +22,10 @@ export class FavService {
     return this.http.get<ApiResponse>(`${URL_API}/${ENDPOINT}.php?id_usuario=${id_usuario}`, { headers: this.commonService.headers });
   }
 
+  getFavoritoById(id: number | null) {
+    return this.http.get<ApiResponse>(`${URL_API}/${ENDPOINT}.php?id_pelicula_favorita=${id}`, { headers: this.commonService.headers });
+  }
+
   addFavorito(id_usuario: number, id_pelicula:number) {
     const body = JSON.stringify({id_usuario: id_usuario, id_pelicula: id_pelicula});
     return this.http.post<ApiResponse>(`${URL_API}/${ENDPOINT}.php`, body, { headers: this.commonService.headers });

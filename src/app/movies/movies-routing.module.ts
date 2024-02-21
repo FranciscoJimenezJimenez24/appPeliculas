@@ -12,10 +12,9 @@ const routes: Routes = [
     component: LayoutPageComponent,
     children:[
       { path:'list',component:  ListPageComponent},
-      { path:'search', component: SearchPageComponent}, 
-      { path:':id',component: MoviePageComponent},
+      { path:'search', component: SearchPageComponent},
       { path:'fav', component:PeliculasFavoritasComponent},
-
+      { path:':id',component: MoviePageComponent},
       { path:'**', redirectTo: 'list',pathMatch:"full"}
     ]
   }

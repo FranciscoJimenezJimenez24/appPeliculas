@@ -21,17 +21,13 @@ export class PeliculasFavoritasComponent implements OnInit{
   user!:User
   permises!: Permises;
   peliculas_favoritas:Movie[]=[]
-  peliculas:Movie[]=[]
   listaFav: FavoriteMovie[]=[]
   token:string | null=localStorage.getItem('token')
   id_usuario:number | string | null=localStorage.getItem('id_usuario')
-  id:Number | null=Number(this.id_usuario)
   listaIDmovies: Number[]=[]
+  fav!:FavoriteMovie
 
   ngOnInit(){
-    this.movieService.getMovies().subscribe(movies=>{
-      this.peliculas=(movies as Root).results
-    })
     this.getUser()
     this.getFavoritos()
   }
@@ -56,15 +52,11 @@ export class PeliculasFavoritasComponent implements OnInit{
       if (RESPONSE !== undefined) {
         if (RESPONSE.ok && RESPONSE){
           this.listaFav=RESPONSE?.data as FavoriteMovie[];
-
-          this.listaFav.forEach(fav => {
-            if (this.user.id_usuario==fav.id_usuario){
-              this.peliculas.forEach(peli=>{
-                if (peli.id=== fav.id_pelicula) {
-                  this.listaIDmovies.push(peli.id);
-                  this.peliculas_favoritas.push(peli);
-                }
-              });
+          this.listaFav.forEach(async fav => {
+            this.listaIDmovies.push(fav.id_pelicula);
+            const pelicula= await this.movieService.getMovieById(fav.id_pelicula).toPromise();
+            if (pelicula) {
+              this.peliculas_favoritas.push(pelicula);
             }
           });
 
@@ -75,21 +67,21 @@ export class PeliculasFavoritasComponent implements OnInit{
 
   }
 
-  async borrarFavorito(){
-    const RESPONSE= await this.favService.getAllFavoritos(this.user.id_usuario).toPromise();
+  async borrarFavorito(id:number | null){
+    const RESPONSE= await this.favService.getFavoritoById(id).toPromise();
       if (RESPONSE && RESPONSE.ok) {
-        this.listaFav=RESPONSE.data;
-        for (let fav: number = 0; fav < this.listaFav.length; fav++) {
-          if (this.listaFav[fav].id_pelicula == this.listaIDmovies[fav] && this.listaFav[fav].id_usuario == this.user.id_usuario) {
-            const RESPONSE2 = await this.favService.deleteFavorito(this.listaFav[fav].id_pelicula_favorita).toPromise();
-            if (RESPONSE2 && RESPONSE2.ok && RESPONSE2?.message) {
-              this.snackBar.open("Borrada de favoritas", 'Cerrar', { duration: 5000 });
-              break; // Salir del bucle una vez que se haya borrado de favoritas
-            } else {
-              this.snackBar.open('Error al borrar de favoritas', 'Cerrar', { duration: 5000 });
-            }
+
+        this.fav=RESPONSE.data as FavoriteMovie;
+        if (this.fav.id_usuario==this.user.id_usuario){
+          const RESPONSE2 = await this.favService.deleteFavorito(this.fav.id_pelicula_favorita).toPromise();
+          if (RESPONSE2 && RESPONSE2.ok && RESPONSE2?.message) {
+            this.snackBar.open("Borrada de favoritas", 'Cerrar', { duration: 5000 });
+          } else {
+            this.snackBar.open('Error al borrar de favoritas', 'Cerrar', { duration: 5000 });
           }
         }
+
+
       }
   }
 
