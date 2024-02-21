@@ -19,7 +19,9 @@ const routes: Routes = [
   },
   {
     path:'users',
-    loadChildren:()=>import('./users/users.module').then(m  => m.UsersModule)
+    loadChildren:()=>import('./users/users.module').then(m  => m.UsersModule),
+    canMatch: [canMatchGuard], //Anclamos la función del canMatch
+    canActivate: [canActivateGuard]
   },
   {
     path:'404',

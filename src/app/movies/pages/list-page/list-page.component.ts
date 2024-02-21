@@ -20,4 +20,16 @@ export class ListPageComponent implements OnInit{
       }
     )
   }
+
+  verMasPeliculas(){
+    this.movieService.getMovies().subscribe(
+      respuesta => {
+        // Almacena los resultados en la variable 'listadoMovies' del servicio
+        this.listaMovies = [ ...this.listaMovies, ...respuesta.results ];
+      },
+      error => {
+        console.error('Error en la solicitud HTTP:', error);
+      }
+    )
+  }
 }

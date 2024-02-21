@@ -25,8 +25,13 @@ export class MovieService {
     return this.http.get<Movie>(`${URL_API_FILM}movie/${id}`,{headers: this.sharedService.headersFilm})
   }
 
+  // getMovies():Observable<Root>{
+  //   return this.http.get<Root>(`${URL_API_FILM}trending/movie/week`,{headers: this.sharedService.headersFilm})
+  // }
+
   getMovies():Observable<Root>{
-    return this.http.get<Root>(`${URL_API_FILM}trending/movie/week`,{headers: this.sharedService.headersFilm})
+    let randomPage = Math.floor(Math.random() * 500) + 1;
+    return this.http.get<Root>(`${URL_API_FILM}trending/movie/week?language=en-US&page=${randomPage}`, {headers: this.sharedService.headersFilm});
   }
 
 }

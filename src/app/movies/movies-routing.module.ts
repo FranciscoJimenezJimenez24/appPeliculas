@@ -12,7 +12,7 @@ const routes: Routes = [
     component: LayoutPageComponent,
     children:[
       { path:'list',component:  ListPageComponent},
-      { path:'search', component: PeliculasFavoritasComponent},
+      { path:'search', component: SearchPageComponent}, //aqui iria searchcomponent
       { path:':id',component: MoviePageComponent},
       { path:'fav',component:PeliculasFavoritasComponent},
       { path:'**', redirectTo: 'list',pathMatch:"full"}

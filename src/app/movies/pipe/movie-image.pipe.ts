@@ -6,7 +6,7 @@ import { Movie } from "../../shared/interfaces/movie.interface";
 })
 export class MovieImagePipe implements PipeTransform {
   transform(movie: Movie): string {
-    if (!movie.id && !movie.poster_path){
+    if (!movie.poster_path){
       return 'assets/no-image.png'
     }
 

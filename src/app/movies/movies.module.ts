@@ -9,6 +9,8 @@ import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { MaterialModule } from '../material/material.module';
 import { CardComponent } from './components/card/card.component';
 import { MovieImagePipe } from './pipe/movie-image.pipe';
+import { PeliculasFavoritasComponent } from './pages/peliculas-favoritas/peliculas-favoritas.component';
+import { PuntitosPipe } from './pipe/puntitos';
 
 
 @NgModule({
@@ -18,7 +20,9 @@ import { MovieImagePipe } from './pipe/movie-image.pipe';
     ListPageComponent,
     SearchPageComponent,
     CardComponent,
-    MovieImagePipe
+    MovieImagePipe,
+    PeliculasFavoritasComponent,
+    PuntitosPipe
   ],
   imports: [
     CommonModule,

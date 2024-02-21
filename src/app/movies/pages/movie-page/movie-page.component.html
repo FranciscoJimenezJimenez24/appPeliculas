@@ -7,7 +7,7 @@
 
 </ng-template>
 
-<div class="fondo" *ngIf="movie; else divLoading" class="grid p-2">
+<div *ngIf="movie; else divLoading" class="grid p-2">
   <mat-card class="col-12 sm:col-6">
     <mat-card-header>
       <mat-card-title>{{movie.title}}</mat-card-title>
@@ -38,12 +38,9 @@
         <mat-list-item>{{movie?.video}}</mat-list-item> -->
       </mat-list>
 
-      <mat-card-content>
-        <button (click)="favorito()" color="primary" mat-raised-button>
-          <mat-icon>favorite</mat-icon>
-
-        </button>
-      </mat-card-content>
+      <button (click)="favorito()" color="primary" mat-raised-button>
+        <mat-icon>favorite</mat-icon>
+      </button>
 
 
       <mat-card-content>
@@ -56,17 +53,4 @@
 
     </mat-card-content>
   </mat-card>
-
-
-
-
 </div>
-
-
-<style>
-  .fondo{
-    background-image: url();
-    background-size: cover; /* Ajusta la imagen al tamaño del elemento */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Agrega una sombra */
-  }
-</style>

@@ -17,7 +17,6 @@ import { MovieImagePipe } from '../movies/pipe/movie-image.pipe';
     AddUserComponent,
     EditUserComponent,
     DeleteUserComponent,
-    PeliculasFavoritasComponent,
   ],
   imports: [
     CommonModule,
