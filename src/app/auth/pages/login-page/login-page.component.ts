@@ -21,6 +21,7 @@ export class LoginPageComponent {
   alerta!: string;
   showSpinner!: boolean;
   error!: string;
+  mostrarContrasena: boolean = false;
 
   constructor(
               private authService: AuthService,
@@ -75,9 +76,5 @@ export class LoginPageComponent {
       this.valueChange.emit(true);
   }
 
-  focusPasswordAfterDelay() {
-    setTimeout(() => {
-      this.passwordInput.nativeElement.focus();
-    }, 3000); // 3000 milliseconds (3 seconds) delay, adjust as needed
-  }
+
 }

@@ -30,6 +30,7 @@ export class PeliculasFavoritasComponent implements OnInit{
   ngOnInit(){
     this.getUser()
     this.getFavoritos()
+
   }
 
   async getUser(){
@@ -59,30 +60,14 @@ export class PeliculasFavoritasComponent implements OnInit{
               this.peliculas_favoritas.push(pelicula);
             }
           });
-
         }
       }
-
     }
 
   }
 
-  async borrarFavorito(id:number | null){
-    const RESPONSE= await this.favService.getFavoritoById(id).toPromise();
-      if (RESPONSE && RESPONSE.ok) {
+  async borrarFavorito(){
 
-        this.fav=RESPONSE.data as FavoriteMovie;
-        if (this.fav.id_usuario==this.user.id_usuario){
-          const RESPONSE2 = await this.favService.deleteFavorito(this.fav.id_pelicula_favorita).toPromise();
-          if (RESPONSE2 && RESPONSE2.ok && RESPONSE2?.message) {
-            this.snackBar.open("Borrada de favoritas", 'Cerrar', { duration: 5000 });
-          } else {
-            this.snackBar.open('Error al borrar de favoritas', 'Cerrar', { duration: 5000 });
-          }
-        }
-
-
-      }
   }
 
 
