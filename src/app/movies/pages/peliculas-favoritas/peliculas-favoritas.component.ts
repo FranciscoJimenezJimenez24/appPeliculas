@@ -25,12 +25,14 @@ export class PeliculasFavoritasComponent implements OnInit{
   token:string | null=localStorage.getItem('token')
   id_usuario:number | string | null=localStorage.getItem('id_usuario')
   listaIDmovies: Number[]=[]
+  listaIDFav: number[]=[]
   fav!:FavoriteMovie
 
   ngOnInit(){
     this.getUser()
     this.getFavoritos()
-
+    console.log(this.listaFav)
+    console.log(this.listaIDFav)
   }
 
   async getUser(){
@@ -49,12 +51,15 @@ export class PeliculasFavoritasComponent implements OnInit{
   async getFavoritos(){
     if (this.user){
       console.log(this.user.id_usuario)
-      const RESPONSE= await this.favService.getAllFavoritos(this.user.id_usuario).toPromise();
+      const RESPONSE= await this.favService.getFavoritoByUsuario(this.user.id_usuario).toPromise();
       if (RESPONSE !== undefined) {
         if (RESPONSE.ok && RESPONSE){
           this.listaFav=RESPONSE?.data as FavoriteMovie[];
           this.listaFav.forEach(async fav => {
+            console.log(fav)
             this.listaIDmovies.push(fav.id_pelicula);
+            this.listaIDFav.push(fav.id_pelicula_favorita!!);
+            console.log(fav.id_pelicula_favorita)
             const pelicula= await this.movieService.getMovieById(fav.id_pelicula).toPromise();
             if (pelicula) {
               this.peliculas_favoritas.push(pelicula);

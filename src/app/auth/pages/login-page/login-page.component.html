@@ -8,11 +8,11 @@
               <mat-form-field class="example-full-width">
                   <input matInput class="form-control full-width-input" placeholder="Correo electrónico"
                       formControlName="username" name="username" type="text" required
-                      >
+                      (keydown.enter)="onUsernameEnter()">
               </mat-form-field>
           </div>
           <div class="form-group" > <!-- Mostrar solo si mostrarContraseña es true -->
-              <mat-form-field class="example-full-width">
+              <mat-form-field *ngIf="mostrarContrasena" class="example-full-width">
                   <input #passwordInput matInput class="form-control full-width-input" placeholder="Contraseña"
                       formControlName="password" #input2 type="password" name="password" required>
               </mat-form-field>

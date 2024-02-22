@@ -5,5 +5,8 @@
 }
 
 .movie-card {
-  width: 100%; /* Asegura que las tarjetas de película ocupen todo el espacio disponible */
+  flex: 0 0 20%; /* Ajusta el ancho según tus necesidades */
+  padding: 10px; /* Ajusta el espaciado entre las tarjetas según tus necesidades */
+  box-sizing: border-box; /* Incluye el padding en el ancho total del contenedor */
+  margin-top: 10px; /* Ajusta el margen superior según sea necesario */
 }

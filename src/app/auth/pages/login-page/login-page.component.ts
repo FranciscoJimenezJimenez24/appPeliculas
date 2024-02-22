@@ -75,6 +75,11 @@ export class LoginPageComponent {
   forgotPassword() {
       this.valueChange.emit(true);
   }
-
+  onUsernameEnter() {
+    this.mostrarContrasena = true;
+    setTimeout(() => {
+      this.passwordInput.nativeElement.focus();
+    }, 0);
+  }
 
 }

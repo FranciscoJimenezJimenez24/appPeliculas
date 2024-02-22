@@ -4,8 +4,7 @@ import { Movie } from '../../../shared/interfaces/movie.interface';
 @Component({
   selector: 'movies-movie-card',
   templateUrl: './card.component.html',
-  styles: [
-  ]
+  styleUrls: [ './card.component.css'  ]
 })
 export class CardComponent {
   @Input()

@@ -1,6 +1,6 @@
 <h1>Listado de Películas</h1>
 <mat-divider></mat-divider>
-<div class="movie-grid">
+<div class="flex flex-wrap movie-card-container">
   <div *ngFor="let movie of listaMovies" class="movie-card">
     <movies-movie-card [routerLink]="['/movies', movie.id]" [movie]="movie"></movies-movie-card>
   </div>

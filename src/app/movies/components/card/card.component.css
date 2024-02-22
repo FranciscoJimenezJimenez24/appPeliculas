@@ -1,8 +1,5 @@
-.truncate {
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 2; /* Número máximo de líneas a mostrar */
-  -webkit-box-orient: vertical;
-  white-space: normal;
-  width: 1px;
+.movie-poster {
+  width: 300px; /* Ancho deseado */
+  height: 450px; /* Alto deseado */
+  object-fit: cover; /* Ajusta la imagen para que cubra el contenedor manteniendo su relación de aspecto */
 }

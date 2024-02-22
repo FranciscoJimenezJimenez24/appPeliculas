@@ -13,7 +13,7 @@ export class MovieService {
   constructor(private http: HttpClient,private sharedService: SharedService) { }
 
   getMovieByTitle(title:string):Observable<Root | undefined> {
-    return this.http.get<Root>(`${URL_API_FILM}search/movie?query=${title}&include_adult=false&language=es`,{headers: this.sharedService.headersFilm}).pipe(
+    return this.http.get<Root>(`${URL_API_FILM}search/movie?query=${title}&include_adult=false`,{headers: this.sharedService.headersFilm}).pipe(
       catchError(error => {
         console.error('Error:', error);
         return of(undefined);
