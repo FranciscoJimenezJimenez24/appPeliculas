@@ -3,11 +3,8 @@ import { MovieService } from '../../../services/movie.service';
 import { Movie, Root } from '../../../shared/interfaces/movie.interface';
 import { Component, OnInit } from '@angular/core';
 import { switchMap } from 'rxjs';
-import { AuthService } from '../../../services/auth.service';
 import { FavService } from 'src/app/services/fav.service';
-import { User } from 'src/app/shared/interfaces/user.interface';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { UserService } from '../../../services/user.service';
 import { Permises } from 'src/app/shared/interfaces/api-response.interface';
 import { FavoriteMovie } from 'src/app/shared/interfaces/fav.interface';
 
@@ -18,22 +15,18 @@ import { FavoriteMovie } from 'src/app/shared/interfaces/fav.interface';
 })
 export class MoviePageComponent implements OnInit {
   public movie?:Movie;
-  token:string | null=localStorage.getItem('token');
   id_usuario:number | string | null=localStorage.getItem('id_usuario')
   permises!:Permises
-  user!:User
   lista_fav:FavoriteMovie[]=[]
   listaMovie:Movie[]=[]
-  isFavorito:boolean=false;
-  
+  isFavorito!:boolean;
+
 
   constructor(
     private movieService: MovieService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private authService: AuthService,
     private favService: FavService,
-    private userService: UserService,
     private snackBar: MatSnackBar,
     ){
   }
@@ -50,20 +43,21 @@ export class MoviePageComponent implements OnInit {
         this.movieService.getMovieByTitle(this.movie!.title).subscribe(res =>{
           this.listaMovie=(res as Root).results
         })
+        this.comprobarFavorito();
         return;
       })
-      this.getUser();
-      
+
+
   }
 
   async favorito(){
-    if (this.user != undefined) {
+    if (this.id_usuario) {
       if (this.isFavorito){
-        const RESPONSE= await this.favService.getAllFavoritos(this.user.id_usuario).toPromise();
+        const RESPONSE= await this.favService.getAllFavoritos(this.id_usuario).toPromise();
         if (RESPONSE && RESPONSE.ok) {
           this.lista_fav=RESPONSE.data;
           for (const fav of this.lista_fav) {
-            if (fav.id_pelicula == this.movie!.id && fav.id_usuario == this.user.id_usuario) {
+            if (fav.id_pelicula == this.movie!.id && fav.id_usuario == this.id_usuario) {
               const RESPONSE2 = await this.favService.deleteFavorito(fav.id_pelicula_favorita).toPromise();
               if (RESPONSE2 && RESPONSE2.ok && RESPONSE2?.message) {
                 this.isFavorito=false;
@@ -76,7 +70,7 @@ export class MoviePageComponent implements OnInit {
           }
         }
       }else{
-        const RESPONSE = await this.favService.addFavorito(this.user.id_usuario, this.movie!.id).toPromise();
+        const RESPONSE = await this.favService.addFavorito(this.id_usuario, this.movie!.id).toPromise();
         console.log(RESPONSE);
         if (RESPONSE && RESPONSE.ok && RESPONSE?.message) {
           this.isFavorito=true;
@@ -85,22 +79,24 @@ export class MoviePageComponent implements OnInit {
           this.snackBar.open('Error al agregar a favoritas', 'Cerrar', { duration: 5000 });
         }
       }
-      
     }
-
   }
 
-  async getUser(){
-    const RESPONSE= await this.userService.getUsuarioById(this.id_usuario).toPromise();
-    if (RESPONSE){
-      const users:User[]=RESPONSE.data;
-      users.forEach(user=>{
-        if (user.id_usuario==this.id_usuario){
-          this.user=user;
+  async comprobarFavorito(){
+    const RESPONSE= await this.favService.getAllFavoritos(this.id_usuario).toPromise();
+    if (RESPONSE && RESPONSE.ok) {
+      this.lista_fav=RESPONSE.data;
+      for (const fav of this.lista_fav) {
+        if (fav.id_pelicula == this.movie!.id && fav.id_usuario == this.id_usuario) {
+          this.isFavorito=true
+          break;
+        }else{
+          this.isFavorito=false
         }
-      });
-      console.log(this.user);
+      }
     }
+
+
   }
   goBack(){
     this.router.navigate(["/movies/list"]);

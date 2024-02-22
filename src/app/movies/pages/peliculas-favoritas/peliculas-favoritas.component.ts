@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FavService } from '../../../services/fav.service';
-import { User } from 'src/app/shared/interfaces/user.interface';
 import { Permises } from 'src/app/shared/interfaces/api-response.interface';
-import { UserService } from 'src/app/services/user.service';
-import { Movie, Root } from 'src/app/shared/interfaces/movie.interface';
+import { Movie } from 'src/app/shared/interfaces/movie.interface';
 import { FavoriteMovie } from 'src/app/shared/interfaces/fav.interface';
 import { MovieService } from 'src/app/services/movie.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -16,50 +14,30 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class PeliculasFavoritasComponent implements OnInit{
 
-  constructor(private favService:FavService, private userService: UserService, private movieService: MovieService, private snackBar: MatSnackBar,) {}
+  constructor(private favService:FavService, private movieService: MovieService, private snackBar: MatSnackBar,) {}
 
-  user!:User
   permises!: Permises;
   peliculas_favoritas:Movie[]=[]
   listaFav: FavoriteMovie[]=[]
-  token:string | null=localStorage.getItem('token')
   id_usuario:number | string | null=localStorage.getItem('id_usuario')
-  listaIDmovies: Number[]=[]
-  listaIDFav: number[]=[]
-  fav!:FavoriteMovie
+  dictFav: { [key: string]: number } = {};
 
   ngOnInit(){
-    this.getUser()
     this.getFavoritos()
-    console.log(this.listaFav)
-    console.log(this.listaIDFav)
   }
 
-  async getUser(){
-    const RESPONSE= await this.userService.getUsuarioById(this.id_usuario).toPromise();
-    if (RESPONSE){
-      const users:User[]=RESPONSE.data;
-      users.forEach(user=>{
-        if (user.id_usuario==this.id_usuario){
-          this.user=user;
-        }
-      });
-      this.getFavoritos()
-    }
-  }
+
 
   async getFavoritos(){
-    if (this.user){
-      console.log(this.user.id_usuario)
-      const RESPONSE= await this.favService.getFavoritoByUsuario(this.user.id_usuario).toPromise();
+    if (this.id_usuario){
+      const RESPONSE= await this.favService.getAllFavoritos(this.id_usuario).toPromise();
+      console.log(RESPONSE);
+
       if (RESPONSE !== undefined) {
         if (RESPONSE.ok && RESPONSE){
           this.listaFav=RESPONSE?.data as FavoriteMovie[];
           this.listaFav.forEach(async fav => {
-            console.log(fav)
-            this.listaIDmovies.push(fav.id_pelicula);
-            this.listaIDFav.push(fav.id_pelicula_favorita!!);
-            console.log(fav.id_pelicula_favorita)
+            this.dictFav[fav.id_pelicula]=fav.id_pelicula_favorita
             const pelicula= await this.movieService.getMovieById(fav.id_pelicula).toPromise();
             if (pelicula) {
               this.peliculas_favoritas.push(pelicula);
@@ -68,11 +46,18 @@ export class PeliculasFavoritasComponent implements OnInit{
         }
       }
     }
-
   }
 
-  async borrarFavorito(){
-
+  async borrarFavorito(id_pelicula:number | string){
+    const id_pelicula_favorita=this.dictFav[id_pelicula]
+    if (id_pelicula_favorita){
+      const RESPONSE  =await this.favService.deleteFavorito(id_pelicula_favorita).toPromise();
+      if (RESPONSE && RESPONSE.ok && RESPONSE?.message) {
+        this.snackBar.open("Borrada de favoritas", 'Cerrar', { duration: 5000 });
+      } else {
+        this.snackBar.open('Error al borrar de favoritas', 'Cerrar', { duration: 5000 });
+      }
+    }
   }
 
 
