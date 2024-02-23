@@ -6,8 +6,7 @@ import { Movie, Root } from '../../../shared/interfaces/movie.interface';
 @Component({
   selector: 'app-search-page',
   templateUrl: './search-page.component.html',
-  styles: [
-  ]
+  styleUrls: [ './search-page.component.css']
 })
 export class SearchPageComponent {
 

@@ -9,8 +9,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-peliculas-favoritas',
   templateUrl: './peliculas-favoritas.component.html',
-  styles: [
-  ]
+  styleUrls: [ './peliculas-favoritas.component.css' ]
 })
 export class PeliculasFavoritasComponent implements OnInit{
 
@@ -52,6 +51,7 @@ export class PeliculasFavoritasComponent implements OnInit{
     const id_pelicula_favorita=this.dictFav[id_pelicula]
     if (id_pelicula_favorita){
       const RESPONSE  =await this.favService.deleteFavorito(id_pelicula_favorita).toPromise();
+      this.peliculas_favoritas=this.peliculas_favoritas.filter(peli=> peli.id!=id_pelicula)
       if (RESPONSE && RESPONSE.ok && RESPONSE?.message) {
         this.snackBar.open("Borrada de favoritas", 'Cerrar', { duration: 5000 });
       } else {

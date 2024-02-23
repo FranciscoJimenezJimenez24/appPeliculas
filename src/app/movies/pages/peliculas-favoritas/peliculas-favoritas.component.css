@@ -1,0 +1,21 @@
+.movie-info-container {
+    display: flex;
+    align-items: center; /* Centra verticalmente los elementos */
+  }
+  
+.movie-image {
+width: 100px; /* Establece un ancho fijo para la imagen */
+height: auto; /* Permite que la altura se ajuste automáticamente para mantener la proporción */
+margin-right: 20px; /* Agrega espacio a la derecha de la imagen */
+}
+.button-container {
+display: flex;
+flex-direction: column; /* Coloca los botones en una disposición vertical */
+margin-top: 10px; /* Ajusta el margen superior entre los botones */
+}
+
+/* Estilos adicionales para los botones si lo necesitas */
+.button-container button {
+margin-bottom: 5px; /* Ajusta el margen inferior entre los botones */
+}
+

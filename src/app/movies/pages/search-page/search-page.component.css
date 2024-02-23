@@ -4,12 +4,23 @@
   flex-wrap: wrap; 
 }
 
-.movie-card {
-  flex: 0 0 20%; /* Ajusta el ancho según tus necesidades */
-  padding: 10px; /* Ajusta el espaciado entre las tarjetas según tus necesidades */
-  box-sizing: border-box; /* Incluye el padding en el ancho total del contenedor */
-  margin-top: 10px; /* Ajusta el margen superior según sea necesario */
+.search-container, .movies-container {
+  width: 100%; 
+  max-width: 1200px; 
+  margin: 0 auto; 
 }
+
+.search-container {
+  max-width: 600px; /* Establece un ancho máximo para el contenedor del buscador */
+}
+
+/* .movie-card {
+  flex: 0 0 calc(25% - 20px); 
+  padding: 10px;
+  box-sizing: border-box;
+  margin-top: 10px;
+} */
+
 .full-width {
-  width: 100%;
+  width: 100%; /* Asegura que los elementos ocupen el ancho completo */
 }

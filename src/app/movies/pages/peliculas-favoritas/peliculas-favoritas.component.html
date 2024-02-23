@@ -7,45 +7,31 @@
 
   </ng-template>
 
-  <div class="fondo" *ngFor="let movie of peliculas_favoritas" class="grid p-2">
-
-      <mat-card class="col-12 sm:col-6">
-        <mat-card-header>
-          <mat-card-title>{{movie.title}}</mat-card-title>
-          <mat-card-subtitle>{{movie.original_title}}</mat-card-subtitle>
-        </mat-card-header>
-        <!-- <img [src]="movie.poster_path" alt="movie.title" mat-card-image> -->
-      </mat-card>
-
-      <mat-card class="col-12 sm:col-6">
-        <!-- <mat-card-header>
-          <mat-card-title>Información</mat-card-title>
-          <mat-card-subtitle>{{movie.superhero}}</mat-card-subtitle>
-        </mat-card-header> -->
-
+  <div *ngFor="let movie of peliculas_favoritas" class="grid p-2">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>{{movie.title}}</mat-card-title>
+        <mat-card-subtitle>{{movie.original_title}}</mat-card-subtitle>
+      </mat-card-header>
+      <div class="movie-info-container">
+        <img [src]="movie | movieImage" alt="movie.title" mat-card-image class="movie-image">
         <mat-card-content>
           <mat-list>
-            <!-- <mat-list-item>{{movie?.adult}}</mat-list-item>
-            <mat-list-item>{{movie?.backdrop_path}}</mat-list-item>
-            <mat-list-item>{{movie?.genre_ids}}</mat-list-item>
-            <mat-list-item>{{movie?.id}}</mat-list-item>
-            <mat-list-item>{{movie?.original_language}}</mat-list-item>
-            <mat-list-item>{{movie?.original_title}}</mat-list-item>
-            <mat-list-item>{{movie?.overview}}</mat-list-item>
-            <mat-list-item>{{movie?.popularity}}</mat-list-item>
-            <mat-list-item>{{movie?.poster_path}}</mat-list-item>
-            <mat-list-item>{{movie?.release_date}}</mat-list-item>
-            <mat-list-item>{{movie?.title}}</mat-list-item>
-            <mat-list-item>{{movie?.video}}</mat-list-item> -->
+            <mat-list-item *ngIf="movie.adult; else notAdult">Película para adultos</mat-list-item>
+            <ng-template #notAdult>
+              <mat-list-item>Película para todos los públicos</mat-list-item>
+            </ng-template>
+            <mat-list-item>{{ movie.release_date | slice:0:4 }}</mat-list-item>
+            <mat-list-item><mat-icon>star</mat-icon>{{movie?.vote_average}}</mat-list-item>
           </mat-list>
-
-
-
-
-          <button mat-raised-button color="primary" (click)="borrarFavorito(movie.id)" ><mat-icon>delete</mat-icon></button>
         </mat-card-content>
-      </mat-card>
-</div>
+        <div class="button-container">
+          <button mat-raised-button color="primary" (click)="borrarFavorito(movie.id)"><mat-icon>delete</mat-icon></button>
+          <button mat-raised-button color="primary" [routerLink]="['/movies', movie.id]">Info</button>
+        </div>
+      </div>
+    </mat-card>
+  </div>
 
 
 
