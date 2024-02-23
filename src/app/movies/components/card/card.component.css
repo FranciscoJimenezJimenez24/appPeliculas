@@ -3,3 +3,10 @@
   height: 450px; /* Alto deseado */
   object-fit: cover; /* Ajusta la imagen para que cubra el contenedor manteniendo su relación de aspecto */
 }
+
+mat-card-title{
+  background-color: rgb(51, 46, 46);
+  text-align: center;
+}
+
+

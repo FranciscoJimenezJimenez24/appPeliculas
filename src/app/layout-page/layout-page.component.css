@@ -1,9 +1,10 @@
 .mat-toolbar {
-    background-color: black; 
-    color: white; 
+    background-color: black;
+    color: white;
 }
 .logout {
-    background-color: #F5C518; 
-    color: black; 
-    
+    background-color: #F5C518;
+}
+.nombre{
+  margin-right: 20px;
 }

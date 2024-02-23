@@ -3,13 +3,60 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 </head>
+<body *ngIf="movie">
+  <div class='card'>
+    <div class='card_left'>
+      <img [src]="movie | movieImage" alt="movie.title" mat-card-image>
+    </div>
+    <div class='card_right'>
+      <h1>{{movie.title}}</h1>
+      <div class='card_right__details'>
+        <ul>
+          <li>{{movie.release_date | slice: 0:4}}</li>
+          <li>{{movie.runtime}} min</li>
+          <li>
+            <span *ngFor="let genre of movie.genres; let i = index;">{{genre.name}} </span>
+          </li>
+          <li *ngIf="movie.adult; else notAdult">18</li>
+          <ng-template #notAdult>
+            <li>7</li>
+          </ng-template>
+        </ul>
+        <div class='card_right__review'>
+          {{movie.overview}}
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+
+<div class="related-movies-container">
+  Peliculas relacionadas
+  <div class="flex flex-wrap movie-card-container">
+    <div *ngFor="let movie of listaMovie" class="movie-card">
+      <movies-movie-card [routerLink]="['/movies', movie.id]" [movie]="movie"></movies-movie-card>
+    </div>
+  </div>
+</div>
+<button mat-flat-button  (click)="goBack()" style="background-color: #F5C518;">
+  <mat-icon>arrow_back</mat-icon>
+  <strong style="color:black;">Volver a la página principal</strong>
+</button>
+
+
+
+<!-- <head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+</head>
 <div *ngIf="movie" class="movie-details-container">
 
   <div class="movie-background-image" [style.background-image]="'linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7)), url(https://image.tmdb.org/t/p/original' + movie.backdrop_path + ')'"></div>
     <div class="movie-content">
 
       <img [src]="movie | movieImage" alt="movie.title" mat-card-image>
-  
       <div class="movie-info">
         <h1>{{ movie.title }}</h1>
         <div class="argumento">
@@ -18,22 +65,31 @@
             <p class="argumento-texto">{{ movie.overview }}</p>
           </div>
         </div>
-  
-        <!-- <div *ngIf="movie.genres.length > 0" class="chip-group">
+        <mat-list>
+          <mat-list-item *ngIf="movie.adult; else notAdult">Película para adultos</mat-list-item>
+          <ng-template #notAdult>
+            <mat-list-item>Película para todos los públicos</mat-list-item>
+          </ng-template>
+          <mat-list-item>{{ movie.release_date | slice:0:4 }}</mat-list-item>
+          <mat-list-item class="icon-and-text">
+            <mat-icon matListItemIcon style="color: #F5C518;">star</mat-icon>{{movie!.vote_average}}
+          </mat-list-item>
+        </mat-list>
+         <div *ngIf="movie.genres.length > 0" class="chip-group">
           <mat-chip style="font-size: 200px;">Genres</mat-chip>
           <div class="resultados">
-            <span *ngFor="let genre of movieData.genres; let last = last">
+            <span *ngFor="let genre of movie.genres; let last = last">
               {{ genre.name }}
               <ng-container *ngIf="!last"> - </ng-container>
             </span>
           </div>
-        </div> -->
-  
-        <!-- <div *ngIf="movie.homepage" class="chip-group">
+          </div>
+
+         <div *ngIf="movie.homepage" class="chip-group">
           <mat-chip>Homepage</mat-chip>
-          <a [href]="movie.homepage" target="_blank" class="resultados">{{ movieData.homepage }}</a>
+          <a [href]="movie.homepage" target="_blank" class="resultados">{{ movie.homepage }}</a>
         </div>
-  
+
         <div *ngIf="movie.production_countries.length > 0" class="chip-group">
           <mat-chip>Production Countries</mat-chip>
           <div class="resultados">
@@ -42,11 +98,11 @@
               <ng-container *ngIf="!last"> - </ng-container>
             </span>
           </div>
-        </div> -->
+        </div>
         <br>
-        <button (click)="favorito()" style="color:'{{ isFavorito ? 'warn' : 'primary' }}'" mat-icon-button>
+        <button (click)="favorito()" [color]="!isFavorito ? 'primary' : 'warn' " mat-icon-button>
           <mat-icon>{{ isFavorito ? 'favorite' : 'favorite_border' }}</mat-icon>
-        </button> 
+        </button>
       </div>
     </div>
 </div>
@@ -59,7 +115,7 @@
     </div>
   </div>
 </div>
-<button mat-flat-button color="primary" (click)="goBack()">
+<button mat-flat-button  (click)="goBack()" style="background-color: #F5C518;">
   <mat-icon>arrow_back</mat-icon>
-  Volver a la página principal
-</button>
+  <strong style="color:black;">Volver a la página principal</strong>
+</button> -->

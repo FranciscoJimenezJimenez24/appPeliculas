@@ -20,6 +20,7 @@ export class MoviePageComponent implements OnInit {
   lista_fav:FavoriteMovie[]=[]
   listaMovie:Movie[]=[]
   isFavorito!:boolean;
+  list:number[]=[3,7,12,16]
 
 
   constructor(

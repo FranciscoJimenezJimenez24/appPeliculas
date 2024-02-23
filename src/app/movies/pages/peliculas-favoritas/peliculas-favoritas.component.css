@@ -2,7 +2,7 @@
     display: flex;
     align-items: center; /* Centra verticalmente los elementos */
   }
-  
+
 .movie-image {
 width: 100px; /* Establece un ancho fijo para la imagen */
 height: auto; /* Permite que la altura se ajuste automáticamente para mantener la proporción */
@@ -19,3 +19,12 @@ margin-top: 10px; /* Ajusta el margen superior entre los botones */
 margin-bottom: 5px; /* Ajusta el margen inferior entre los botones */
 }
 
+
+.icon-and-text {
+  display: flex;
+  align-items: center; /* Alinea verticalmente los elementos */
+}
+
+.icon-and-text mat-icon {
+  margin-right: 5px; /* Ajusta el margen derecho para acercar el icono al texto */
+}

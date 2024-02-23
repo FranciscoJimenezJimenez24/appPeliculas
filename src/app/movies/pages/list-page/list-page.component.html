@@ -1,13 +1,15 @@
-<h1>Listado de Películas</h1>
-<mat-divider></mat-divider>
-<div class="center-container">
-  <div class="movie-grid">
-    <div *ngFor="let movie of listaMovies" class="movie-card">
-      <movies-movie-card [routerLink]="['/movies', movie.id]" [movie]="movie"></movies-movie-card>
+<div class="black-background">
+  <h1>Listado de Películas</h1>
+  <mat-divider></mat-divider>
+  <div class="movies-container">
+    <div class="flex flex-wrap">
+      <div *ngFor="let movie of listaMovies" class="movie-item">
+        <movies-movie-card [routerLink]="['/movies', movie.id]" [movie]="movie"></movies-movie-card>
+      </div>
     </div>
   </div>
-</div>
 
-<div class="row justify-content-center">
-  <button mat-stroked-button color="primary" (click)="verMasPeliculas()" style="width: auto;">Cargar más resultados</button>
+  <div class="center-button">
+    <button mat-stroked-button color="primary" (click)="verMasPeliculas()" style="width: auto;">Cargar más resultados</button>
+  </div>
 </div>

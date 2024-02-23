@@ -1,31 +1,19 @@
-.center-container {
+.movies-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.center-button {
   display: flex;
   justify-content: center;
+  margin-top: 20px;
 }
-
-.movie-grid {
-  max-width: 1000px; /* Establece el ancho máximo */
-  width: 100%; /* Asegura que el contenedor ocupe todo el ancho disponible */
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Crea columnas automáticas */
-  grid-gap: 20px; /* Espacio entre las películas */
+.black-background {
+  background-color: black;
+  color: white;
+  padding: 20px;
 }
-
-.movie-card {
-  padding: 0; 
-  margin: 0; 
-}
-
-/* Ajusta el tamaño de la imagen dentro del card */
-.movie-card img {
-  width: 100%; /* Ajusta la imagen para que ocupe todo el ancho del card */
-  height: auto; /* Permite que la altura de la imagen se ajuste automáticamente */
-}
-
-/* Ajusta el estilo del título para que se muestre correctamente */
-.movie-card-title {
-  /* Puedes ajustar el estilo del título según tus preferencias */
-  font-size: 16px;
-  font-weight: bold;
-  margin-top: 5px; /* Agrega espacio superior al título */
+.movie-item {
+  margin-right: 10px;
+  margin-bottom: 10px;
 }

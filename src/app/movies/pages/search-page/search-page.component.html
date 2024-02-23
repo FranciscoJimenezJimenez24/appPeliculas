@@ -1,24 +1,23 @@
-<div class="search-and-movies-container">
-  <div class="search-container">
-    <div class="flex flex-wrap p-2 full-width">
-      <h3>Buscador</h3>
-      <mat-form-field class="full-width">
-        <mat-label>Buscador de Películas</mat-label>
-        <input
-          type="search"
-          matInput
-          [formControl]="searchInput"
-          (keydown.enter)="searchMovie()"
-        >
-      </mat-form-field>
-    </div>
+<div style="background-color: black; height: auto;">
+  <div>
+    <h3>Buscador</h3>
+    <mat-form-field class="full-width">
+      <mat-label>Buscador de Películas</mat-label>
+      <input
+        type="search"
+        matInput
+        [formControl]="searchInput"
+        (keydown.enter)="searchMovie()"
+      >
+    </mat-form-field>
   </div>
 
   <div class="movies-container">
-    <div class="flex flex-wrap movie-card-container">
-      <div class="movie-card" *ngFor="let movie of peliculas">
+    <div class="flex flex-wrap">
+      <div *ngFor="let movie of peliculas">
         <movies-movie-card [routerLink]="['/movies', movie.id]" [movie]="movie"></movies-movie-card>
       </div>
     </div>
   </div>
+
 </div>

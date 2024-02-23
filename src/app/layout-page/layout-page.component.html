@@ -1,6 +1,6 @@
  <mat-sidenav-container fullscreen>
 
-    <mat-sidenav #sidenav mode="push" [ngStyle]="{ width: '250px'}">
+    <mat-sidenav #sidenav mode="push" [ngStyle]="{ width: '250px'}" style="background-color: black;">
       <mat-toolbar color="warn">
         <span>Menú</span>
         <span class="spacer"></span>
@@ -9,12 +9,12 @@
         </button>
       </mat-toolbar>
 
-      <mat-nav-list>
+      <mat-nav-list >
         <ng-container *ngIf="id_rol=='1'">
           <ng-container  *ngFor="let item of sidebarItemsSuperAdmin">
             <mat-list-item (click)="sidenav.toggle()" [routerLink]="item.url">
-              <mat-icon matListItemIcon>{{item.icon}}</mat-icon>
-              {{item.label}}
+              <mat-icon matListItemIcon style="color: #F5C518;">{{item.icon}}</mat-icon>
+              <strong style="color: white;">{{item.label}}</strong>
             </mat-list-item>
           </ng-container>
         </ng-container>
@@ -22,7 +22,7 @@
           <ng-container  *ngFor="let item of sidebarItems">
             <mat-list-item (click)="sidenav.toggle()" [routerLink]="item.url">
               <mat-icon matListItemIcon style="color: #F5C518;">{{item.icon}}</mat-icon>
-              {{item.label}}
+              <strong style="color: white;">{{item.label}}</strong>
             </mat-list-item>
           </ng-container>
         </ng-container>
@@ -35,9 +35,9 @@
         <mat-icon>menu</mat-icon>
       </button>
       <span class="spacer"></span>
-      <span>{{nombre_publico}}</span>
+      <span class="nombre">{{nombre_publico}}</span>
       <button mat-button (click)="onLogout()" class="logout">
-        <strong style="color:black;">Logout</strong> 
+        <strong style="color:black;">Logout</strong>
       </button>
     </mat-toolbar>
 

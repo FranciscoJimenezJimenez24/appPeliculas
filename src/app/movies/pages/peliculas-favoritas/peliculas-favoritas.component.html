@@ -22,7 +22,9 @@
               <mat-list-item>Película para todos los públicos</mat-list-item>
             </ng-template>
             <mat-list-item>{{ movie.release_date | slice:0:4 }}</mat-list-item>
-            <mat-list-item><mat-icon>star</mat-icon>{{movie?.vote_average}}</mat-list-item>
+            <mat-list-item class="icon-and-text">
+              <mat-icon matListItemIcon style="color: #F5C518;">star</mat-icon>{{movie?.vote_average}}
+            </mat-list-item>
           </mat-list>
         </mat-card-content>
         <div class="button-container">
