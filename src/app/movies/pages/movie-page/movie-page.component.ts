@@ -7,11 +7,21 @@ import { FavService } from 'src/app/services/fav.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Permises } from 'src/app/shared/interfaces/api-response.interface';
 import { FavoriteMovie } from 'src/app/shared/interfaces/fav.interface';
+import { animate, style, transition, trigger } from '@angular/animations';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-movie-page',
   templateUrl: './movie-page.component.html',
-  styleUrls: [ './movie-page.component.css']
+  styleUrls: [ './movie-page.component.css'],
+  animations: [
+    trigger('slideRightLeft', [
+      transition('* => slide-right-enter, * => slide-left-enter', [
+        style({ position: 'absolute', width: '100%' }),
+        animate('0.5s ease-in-out', style({ transform: 'translateX(0)' }))
+      ])
+    ])
+  ]
 })
 export class MoviePageComponent implements OnInit {
   public movie?:Movie;
@@ -20,7 +30,10 @@ export class MoviePageComponent implements OnInit {
   lista_fav:FavoriteMovie[]=[]
   listaMovie:Movie[]=[]
   isFavorito!:boolean;
-  list:number[]=[3,7,12,16]
+  totalMovie!:number;
+  indice: number = 0;
+  indiceVideos: number=0;
+  videos: string[] = ['SzINZZ6iqxY', 'U2Qp5pL3ovA', '8KVsaoveTbw', 'UTiKi-uRY1o', 'EJoom2F-7nI'];
 
 
   constructor(
@@ -29,7 +42,9 @@ export class MoviePageComponent implements OnInit {
     private router: Router,
     private favService: FavService,
     private snackBar: MatSnackBar,
+    public sanitizer: DomSanitizer
     ){
+      
   }
 
   ngOnInit():void{
@@ -41,14 +56,42 @@ export class MoviePageComponent implements OnInit {
       .subscribe(pelicula=>{
         if (!pelicula) return this.router.navigate(['/movies/list']);
         this.movie=pelicula;
-        this.movieService.getMovieByTitle(this.movie!.title).subscribe(res =>{
-          this.listaMovie=(res as Root).results
-        })
+        this.movieService.getMovieByTitle(this.movie!.title).subscribe(peliculas => {
+          this.listaMovie = (peliculas as Root).results;
+        });
         this.comprobarFavorito();
         return;
       })
 
 
+  }
+
+  
+  mostrarSiguientes() {
+    if (this.indice + 5 < this.listaMovie.length) {
+      this.indice += 5;
+    }
+  }
+  
+  mostrarAnteriores() {
+    if (this.indice >= 5) {
+      this.indice -= 5;
+    }
+  }
+  getCurrentVideoUrl(): SafeResourceUrl {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/watch?v=${this.videos[this.indice]}`);
+  }
+  
+  playNext() {
+    if (this.indice + 1 < this.videos.length) {
+      this.indice += 1;
+    }
+  }
+
+  playBefore() {
+    if (this.indice >= 1) {
+      this.indice -= 1;
+    }
   }
 
   async favorito(){
@@ -101,6 +144,19 @@ export class MoviePageComponent implements OnInit {
   }
   goBack(){
     this.router.navigate(["/movies/list"]);
+  }
+
+  seeMore(){
+    this.movieService.getMovieByTitle(this.movie!.title).subscribe(peliculas => {
+      const totalMovies = (peliculas as Root).results.length; // totalMovies es el número total de películas  
+      this.totalMovie=totalMovies
+      if (this.listaMovie.length < totalMovies) {
+        this.movieService.getMovieByTitle(this.movie!.title).subscribe(res => {
+          const newMovies = (res as Root).results;
+          this.listaMovie = this.listaMovie.concat(newMovies.slice(0, 5));
+        });
+      }
+    });
   }
 }
 

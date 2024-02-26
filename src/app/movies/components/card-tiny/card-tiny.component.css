@@ -1,0 +1,17 @@
+.small-card {
+  max-width: 150px; /* O el ancho deseado para tu tarjeta pequeña */
+}
+.movie-poster {
+  width: 100%; /* Para asegurar que todas las imágenes tengan el mismo tamaño */
+  height: auto; /* Mantener la proporción de la imagen */
+}
+
+.movie-poster-container {
+  width: 100%; /* Para asegurar que todas las imágenes tengan el mismo tamaño */
+  height: 200px; /* Altura fija para las imágenes */
+  overflow: hidden; /* Para recortar las imágenes que sean más grandes */
+}
+
+.small-title {
+  font-size: 12px; /* Tamaño del texto del título más pequeño */
+}

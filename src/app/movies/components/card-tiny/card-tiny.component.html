@@ -1,0 +1,12 @@
+<mat-card class="small-card">
+  <div class="movie-poster-container">
+    <img mat-card-image [src]="movie | movieImage" [alt]="movie.title" class="movie-poster">
+  </div>
+  
+  <mat-card-title class="small-title">
+    <span>{{movie.title | puntitos:20}}</span>
+  </mat-card-title>
+
+  <mat-divider></mat-divider>
+</mat-card>
+  

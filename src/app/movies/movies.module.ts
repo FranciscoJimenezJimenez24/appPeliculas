@@ -11,6 +11,7 @@ import { CardComponent } from './components/card/card.component';
 import { MovieImagePipe } from './pipe/movie-image.pipe';
 import { PeliculasFavoritasComponent } from './pages/peliculas-favoritas/peliculas-favoritas.component';
 import { PuntitosPipe } from './pipe/puntitos';
+import { CardTinyComponent } from './components/card-tiny/card-tiny.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { PuntitosPipe } from './pipe/puntitos';
     CardComponent,
     MovieImagePipe,
     PeliculasFavoritasComponent,
-    PuntitosPipe
+    PuntitosPipe,
+    CardTinyComponent
   ],
   imports: [
     CommonModule,
