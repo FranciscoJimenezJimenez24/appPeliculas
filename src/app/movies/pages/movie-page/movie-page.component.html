@@ -1,4 +1,4 @@
-<!-- <body *ngIf="movie">
+<body *ngIf="movie">
   <div class='card'>
     <div class='card_left'>
       <img [src]="movie | movieImage" alt="movie.title" mat-card-image>
@@ -45,14 +45,7 @@
         <movies-movie-card-tiny [routerLink]="['/movies', movie.id]" [movie]="movie"></movies-movie-card-tiny>
       </div>
     </div>
-    <button (click)="mostrarAnteriores()" [disabled]="indice === 0">&#8592; Anteriores</button>
-    <button (click)="mostrarSiguientes()" [disabled]="indice >= listaMovie.length - 5">Siguientes &#8594;</button>
+    <button class="ant-btn anteriores-btn" (click)="mostrarAnteriores()" [disabled]="indice === 0"><mat-icon>keyboard_arrow_left</mat-icon></button>
+    <button class="ant-btn siguientes-btn" (click)="mostrarSiguientes()" [disabled]="indice >= listaMovie.length - 5"><mat-icon>keyboard_arrow_right</mat-icon></button>
   </div>
-</body> -->
-
-<iframe [src]="getCurrentVideoUrl()" width="560" height="315" frameborder="0" allowfullscreen></iframe>
-<button (click)="playNext()">Siguiente</button>
-<button (click)="playBefore()">Anterior</button>
-
-
-
+</body>

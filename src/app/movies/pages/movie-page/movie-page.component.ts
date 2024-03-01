@@ -33,7 +33,7 @@ export class MoviePageComponent implements OnInit {
   totalMovie!:number;
   indice: number = 0;
   indiceVideos: number=0;
-  videos: string[] = ['SzINZZ6iqxY', 'U2Qp5pL3ovA', '8KVsaoveTbw', 'UTiKi-uRY1o', 'EJoom2F-7nI'];
+  videos: string[] = ['videoplayback.mp4', 'videoplayback (1).mp4', 'videoplayback (2).mp4', 'videoplayback (3).mp4','videoplayback (4).mp4'];
 
 
   constructor(
@@ -42,13 +42,11 @@ export class MoviePageComponent implements OnInit {
     private router: Router,
     private favService: FavService,
     private snackBar: MatSnackBar,
-    public sanitizer: DomSanitizer
     ){
       
   }
 
   ngOnInit():void{
-
     this.activatedRoute.params
       .pipe(
         switchMap(({id})=>this.movieService.getMovieById(id))
@@ -62,10 +60,7 @@ export class MoviePageComponent implements OnInit {
         this.comprobarFavorito();
         return;
       })
-
-
   }
-
   
   mostrarSiguientes() {
     if (this.indice + 5 < this.listaMovie.length) {
@@ -78,21 +73,7 @@ export class MoviePageComponent implements OnInit {
       this.indice -= 5;
     }
   }
-  getCurrentVideoUrl(): SafeResourceUrl {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/watch?v=${this.videos[this.indice]}`);
-  }
   
-  playNext() {
-    if (this.indice + 1 < this.videos.length) {
-      this.indice += 1;
-    }
-  }
-
-  playBefore() {
-    if (this.indice >= 1) {
-      this.indice -= 1;
-    }
-  }
 
   async favorito(){
     if (this.id_usuario) {

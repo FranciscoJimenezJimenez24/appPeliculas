@@ -1,4 +1,12 @@
 <div class="black-background">
+  <h1>Trailers más populares</h1>
+  <div class="videos-container">
+    <div class="video-controls">
+      <button (click)="changeVideo(-1)" class="navigation-button"><mat-icon>keyboard_arrow_left</mat-icon></button>
+      <video controls autoplay [src]="'assets/videos/' + videos[indiceVideos]" width="640" height="360"></video>
+      <button (click)="changeVideo(1)" class="navigation-button"><mat-icon>keyboard_arrow_right</mat-icon></button>
+    </div>
+  </div>
   <h1>Listado de Películas</h1>
   <mat-divider></mat-divider>
   <div class="movies-container">

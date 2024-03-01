@@ -24,6 +24,7 @@ export class UsersComponent {
 
   dataSource: MatTableDataSource<User> = new MatTableDataSource();
   permises!: Permises;
+  listaUsuario:User[]=[];
 
 
   idUsuarioFilter = new FormControl();
@@ -56,6 +57,7 @@ export class UsersComponent {
         if (RESPONSE.ok) {
           this.displayedColumns = ['id_usuario', 'usuario', 'nombre_publico', 'id_rol', 'actions'];
           this.servicioUsuarios.users = RESPONSE.data as User[];
+          this.listaUsuario=RESPONSE.data as User[];
           this.dataSource.data = this.servicioUsuarios.users;
           this.dataSource.sort = this.sort;
           this.dataSource.paginator = this.paginator;

@@ -17,3 +17,27 @@
   margin-right: 10px;
   margin-bottom: 10px;
 }
+
+.videos-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.video-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navigation-button {
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.navigation-button:hover {
+  color: lightgray;
+}
