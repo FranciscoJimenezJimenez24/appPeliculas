@@ -1,0 +1,54 @@
+.custom-card {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .custom-card .example-card {
+    width: calc(100% - 40px); /* ancho total menos el padding de 20px en cada lado */
+    max-width: 500px;
+    background-color: #222;
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .custom-card .mat-card-header {
+    background-color: #007bff;
+    padding: 10px 20px;
+    border-bottom: 1px solid #0056b3;
+  }
+  
+  .custom-card .mat-card-title {
+    margin-bottom: 0;
+  }
+  
+  .custom-card .mat-card-content {
+    padding: 20px;
+  }
+  
+  .custom-card .mat-card-actions {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .custom-card .button-group {
+    display: flex;
+    justify-content: space-between; /* Espacio entre los botones */
+    width: 100%; /* Ancho total para que los botones ocupen todo el espacio disponible */
+  }
+  
+  .custom-card .mat-card-actions button {
+    border-radius: 5px;
+    width: calc(50% - 5px); /* Ancho de cada botón con espacio entre ellos */
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .custom-card .mat-spinner {
+    display: none;
+  }
+  
+  .custom-card .mat-error {
+    color: red;
+  }
+  

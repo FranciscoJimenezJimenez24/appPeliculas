@@ -1,6 +1,9 @@
 <div class="card">
   <div class="card-header">
-    <h2>Usuarios</h2>
+    <h2 class="header-title">Usuarios</h2>
+    <button *ngIf="permises.add" (click)="addUsuario()" class="add-button">
+      Añadir Usuario
+    </button>
   </div>
   <div class="card-body">
     <div class="table-responsive">
@@ -19,11 +22,8 @@
             <td>{{usuario.id_usuario}}</td>
             <td>{{usuario.usuario}}</td>
             <td>{{usuario.nombre_publico}}</td>
-            <td>{{usuario.id_rol}}</td>
+            <td>{{usuario.rol}}</td>
             <td>
-              <button mat-icon-button *ngIf="permises.add" (click)="addUsuario()">
-                <mat-icon style="color: black; background-color: #F5C518;">add_circle</mat-icon>
-              </button>
               <button mat-icon-button *ngIf="permises.edit" (click)="editUsuario(usuario)">
                 <mat-icon style="color: black; background-color: #F5C518;">mode_edit</mat-icon>
               </button>

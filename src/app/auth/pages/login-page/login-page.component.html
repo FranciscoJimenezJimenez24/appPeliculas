@@ -1,30 +1,30 @@
-<mat-card class="example-card">
-  <mat-card-header>
-      <mat-card-title>{{titulo}}</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-      <form class="example-form" [formGroup]="loginForm">
+<div class="custom-card">
+    <mat-card class="example-card">
+      <mat-card-header>
+        <mat-card-title>{{titulo}}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form class="example-form" [formGroup]="loginForm">
           <div class="form-group">
-              <mat-form-field class="example-full-width">
-                  <input matInput class="form-control full-width-input" placeholder="Correo electrónico"
-                      formControlName="username" name="username" type="text" required
-                      (keydown.enter)="onUsernameEnter()">
-              </mat-form-field>
+            <mat-form-field class="example-full-width" style="width: 100%;">
+              <input matInput class="form-control full-width-input" placeholder="Correo electrónico" formControlName="username" name="username" type="text" required (keydown.enter)="onUsernameEnter()">
+            </mat-form-field>
           </div>
-          <div class="form-group" > <!-- Mostrar solo si mostrarContraseña es true -->
-              <mat-form-field *ngIf="mostrarContrasena" class="example-full-width">
-                  <input #passwordInput matInput class="form-control full-width-input" placeholder="Contraseña"
-                      formControlName="password" #input2 type="password" name="password" required>
-              </mat-form-field>
+          <div class="form-group">
+            <mat-form-field *ngIf="mostrarContrasena" class="example-full-width" style="width: 100%;">
+              <input #passwordInput matInput class="form-control full-width-input" placeholder="Contraseña" formControlName="password" #input2 type="password" name="password" required>
+            </mat-form-field>
           </div>
-          <mat-card-actions>
-              <button type="submit" mat-raised-button class="azulVeo" (click)="acceder()">Acceder</button>
-              <button type="button" mat-raised-button class="azulVeo" (click)="forgotPassword()">
-                  Olvidé mi contraseña
-              </button>
-          </mat-card-actions>
-      </form>
-      <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
-  </mat-card-content>
-  <mat-error *ngIf="error">{{alerta}}</mat-error>
-</mat-card>
+        </form>
+        <mat-card-actions>
+          <div class="button-group">
+            <button type="submit" mat-raised-button class="azulVeo" (click)="acceder()">Acceder</button>
+            <button type="button" mat-raised-button class="azulVeo" (click)="forgotPassword()">Olvidé mi contraseña</button>
+          </div>
+        </mat-card-actions>
+        <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
+      </mat-card-content>
+      <mat-error *ngIf="error">{{alerta}}</mat-error>
+    </mat-card>
+  </div>
+  

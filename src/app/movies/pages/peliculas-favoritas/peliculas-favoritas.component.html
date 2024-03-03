@@ -6,30 +6,28 @@
   </mat-grid-list>
 </ng-template>
 
-<div *ngFor="let movie of peliculas_favoritas" class="grid p-2">
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>{{movie.title}}</mat-card-title>
-      <mat-card-subtitle>{{movie.original_title}}</mat-card-subtitle>
-    </mat-card-header>
-    <div class="movie-info-container">
-      <img [src]="movie | movieImage" alt="movie.title" mat-card-image class="movie-image">
-      <mat-card-content>
-        <mat-list>
-          <mat-list-item *ngIf="movie.adult; else notAdult">Película para adultos</mat-list-item>
-          <ng-template #notAdult>
-            <mat-list-item>Película para todos los públicos</mat-list-item>
-          </ng-template>
-          <mat-list-item>{{ movie.release_date | slice:0:4 }}</mat-list-item>
-          <mat-list-item class="icon-and-text">
-            <mat-icon matListItemIcon style="color: #F5C518;">star</mat-icon>{{movie?.vote_average}}
-          </mat-list-item>
-        </mat-list>
-      </mat-card-content>
-      <div class="button-container">
-        <button mat-raised-button (click)="borrarFavorito(movie.id)"><mat-icon>delete</mat-icon></button>
-        <button mat-raised-button [routerLink]="['/movies', movie.id]">Info</button>
-      </div>
+<div *ngFor="let movie of peliculas_favoritas" class="movie-card-container">
+  <mat-card class="movie-card">
+    <div class="movie-image-container">
+      <img [src]="movie | movieImage" alt="{{ movie.title }}" class="movie-image">
     </div>
+    <mat-card-content class="movie-details">
+      <mat-card-title>{{ movie.title }}</mat-card-title>
+      <mat-card-subtitle style="color: white;"><i>{{ movie.original_title }}</i></mat-card-subtitle>
+      <div class="movie-info">
+        <p *ngIf="movie.adult; else notAdult" class="age-rating">Película para adultos</p>
+        <ng-template #notAdult>
+          <p class="age-rating">Película para todos los públicos</p>
+        </ng-template>
+        <p class="release-year">{{ movie.release_date | slice:0:4 }}</p>
+        <p class="rating"><mat-icon style="color: #F5C518;">star</mat-icon> {{ movie.vote_average }}</p>
+      </div>
+    </mat-card-content>
+    <mat-card-actions class="actions">
+      <button mat-icon-button color="warn" (click)="borrarFavorito(movie.id)">
+        <mat-icon >delete</mat-icon>
+      </button>
+      <button mat-button color="primary" [routerLink]="['/movies', movie.id]">Info</button>
+    </mat-card-actions>
   </mat-card>
 </div>

@@ -1,7 +1,7 @@
 .movie-poster {
-  width: 300px; /* Ancho deseado */
-  height: 450px; /* Alto deseado */
-  object-fit: cover; /* Ajusta la imagen para que cubra el contenedor manteniendo su relación de aspecto */
+  width: 250px; 
+  height: 350px; 
+  object-fit: cover; 
 }
 
 mat-card-title{

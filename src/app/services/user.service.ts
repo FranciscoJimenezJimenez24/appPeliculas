@@ -46,6 +46,7 @@ export class UserService {
   }
 
   getUsuarioById(id_usuario: string | number | null) {
+    console.log(id_usuario)
     return this.http.get<ApiResponse>(`${URL_API}/${ENDPOINT}.php?id_usuario=${id_usuario}`, { headers: this.commonService.headers });
   }
 

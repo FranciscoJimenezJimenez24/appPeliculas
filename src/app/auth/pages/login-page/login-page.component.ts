@@ -9,15 +9,14 @@ import { CommonService } from 'src/app/shared/common.service';
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
-  styles: [
-  ]
+  styleUrls: ['./login-page.component.css']
 })
 export class LoginPageComponent {
   @Output() valueChange = new EventEmitter();
   @ViewChild('passwordInput') passwordInput!: ElementRef;
 
   loginForm!: FormGroup;
-  titulo = 'LOGEAO';
+  titulo = 'LOGIN';
   alerta!: string;
   showSpinner!: boolean;
   error!: string;
@@ -79,7 +78,7 @@ export class LoginPageComponent {
     this.mostrarContrasena = true;
     setTimeout(() => {
       this.passwordInput.nativeElement.focus();
-    }, 0);
+    }, 3000);
   }
 
 }

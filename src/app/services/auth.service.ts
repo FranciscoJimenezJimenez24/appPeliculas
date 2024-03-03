@@ -36,7 +36,6 @@ export class AuthService {
     if (!localStorage.getItem('token')) return of(false); //no necesitamos operacion asincrona
 
     const token = localStorage.getItem('token');
-
     return this.http.get<User>(`${URL_API}/usuario.php`)
       .pipe(
         tap(user=>this.user=user),//tap: efecto secundario para almacenar el usuario
